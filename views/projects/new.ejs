@@ -1,0 +1,24 @@
+<% include ../partials/header %>
+
+<div class="container">
+  <% include ../partials/messages %> 
+  <div class="greybox">
+    <h3>New Question</h3>
+    <hr class="line">
+    <form action="/p/" method="POST">
+      <div class="block">
+          <label for="title">Question:</label>
+          <input type="text" id="title" name="title" aria-describedby="title" placeholder="Enter new question" autofocus
+          value="<%= typeof title != 'undefined' ? title : '' %>"
+          />
+      </div>
+      <div class="block">
+        <label for="description">Description:</label>
+        <textarea type="text" id="description" name="description" rows="4" placeholder="Explain..."><%= typeof description != 'undefined' ? description : '' %></textarea>
+      </div>
+      <button class="btnlink submitBtn">Submit</button>
+    </form>
+  </div>
+</div>
+
+<% include ../partials/footer %>

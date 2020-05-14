@@ -1,0 +1,37 @@
+<% include ../partials/header %>
+
+<% include ../partials/messages %>
+
+
+<div class="container">
+    <section class="userSection">
+        <div class="proImgHolder">
+            <img src="/pro-img/<%= currentUser.profileImg %>" class="user">
+        </div>
+        <div class="proNameHolder">
+            <a class="btn btn-primary btn-sm" href="/profile/<%= currentUser.id %>/edit">Edit Profile</a>
+        </div>
+    </section>
+    <section class="mainSection">
+        <div class="profile-head">
+            <section class="greybox">
+                <h3>
+                <%= currentUser.username %>
+                </h3>
+                <hr class="line"/>
+                <p><b>Registered Since: </b><%= currentUser.date.toDateString() %></p>
+                <hr class="line"/>
+                    <% if(currentUserProjects.length== 0){ %>
+                        <p style="text-align:center">You haven't asked a question yet, <a href="/p/new" data-icon="&#xe044;">Pop a Question</a></p>
+                    <%} else {%>
+                        <h5>Your Questions</h5>
+                        <% currentUserProjects.forEach(function(project){ %>
+                            <a href="/p/<%= project.id %>" class="mauto"></a>
+                        <% });%>
+                    <% }%>
+            </section>
+        </div>
+    </section>
+</div>
+
+<%  include ../partials/footer %>

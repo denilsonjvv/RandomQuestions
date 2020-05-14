@@ -1,0 +1,28 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <% include ../partials/messages %>
+    <% include ../partials/userSection %>
+    <section class="mainSection">
+        <section class="greybox">
+            <h4 class="fl clearfix"><%= project.title %></h4>
+                    <% if(currentUser && project.author.id.equals(currentUser._id)){ %>
+                    <div class="options rightFloater">
+                        <button class="btnlink">
+                            <a href="/p/<%= project.id %>/edit">Edit</a>
+                        </button>
+                        <form class="deleteForm" action="/p/<%= project._id %>%>?_method=DELETE" method="POST">
+                            <button type="submit" class="btnlink deleteBtn">Delete</button>
+                        </form>
+                    </div>
+                <% }; %>
+            <hr class="line"/>
+            <p><%= project.description %></p>
+            <div class="userImgHold simptip-position-bottom simptip-fade" data-tooltip="Admin: <%= project.author.username %>">
+                <img src="/pro-img/<%= project.author.profileImg %>" class="user admin">
+            </div>
+        </section>
+    </section>
+</div>
+
+<% include ../partials/footer %>

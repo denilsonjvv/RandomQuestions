@@ -1,0 +1,32 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <% include ../partials/messages %>
+    <section class="userSection">
+        <div class="proImgHolder">
+            <img src="/pro-img/<%= currentUser.profileImg %>" class="user">
+        </div>
+        <div class="proNameHolder">
+            <a href="/profile/<%= currentUser.id %>" class="mauto"><%= currentUser.username %></a>
+        </div>
+    </section>
+    <section class="mainSection">
+            <section class="greybox">
+                <h3>Settings</h3>
+                <hr class="line"/>
+                <form action="/profile/<%= currentUser._id %>?_method=PUT" method="POST">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" value="<%= currentUser.username %>" aria-describedby="name" placeholder="Your name"/>
+                        <div id="usernameGenerator" onClick="showResults()" class="simptip-position-right simptip-fade" data-tooltip="Generate a random avatar">
+                            <i class="fas fa-random"></i>
+                        </div>
+                        <button class="btnlink submitBtn">
+                            Save
+                        </button>
+                </form>
+            </section>
+    </section>
+</div>
+<script src="../../js/renderUsername.js"></script>
+
+<% include ../partials/footer %>  

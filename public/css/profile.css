@@ -1,0 +1,25 @@
+/*Config*/
+.d-none {
+  display: none;
+}
+
+/*
+profile form code
+form {
+  display: flex;
+  width: 100%;
+  color: #333;
+}
+form label {
+  width: 100%;
+  font-size: 18px;
+  margin: 15px 0 5px;
+  display: block;
+  font-weight: 600;
+}
+form input {
+  border: 1px solid #e8e8e8;
+  padding: 15px;
+  font-size: 16px;
+  border-radius: 5px;
+} */

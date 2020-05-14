@@ -1,0 +1,16 @@
+.main {
+  width: 93%;
+  margin: 50px auto;
+  display: flex;
+}
+.deleteForm {
+  display: inline-block;
+}
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
+.container .block {
+  display: block;
+  margin: 5px 0;
+}

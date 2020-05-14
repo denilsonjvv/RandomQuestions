@@ -1,0 +1,21 @@
+<% include ../partials/header %>
+
+<div class="container">
+  <div class="greybox">
+    <h3>Edit Question</h3>
+    <span class="digit">ID <%= project.id %></span>
+    <form action="/p/<%= project._id %>?_method=PUT" method="POST">
+      <div class="block">
+          <label for="title">Question</label>
+          <input type="text" id="title" name="project[title]" aria-describedby="title" value="<%= project.title %>" placeholder="What is your question?">
+      </div>
+      <div class="block">
+        <label for="description">Description:</label>
+        <textarea type="text" id="description" name="project[description]" placeholder="Describe your question."><%= project.description %></textarea>
+      </div>
+      <button class="btnlink submitBtn">Submit</button>
+    </form>
+  </div>
+</div>
+
+<% include ../partials/footer %>

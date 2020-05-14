@@ -1,0 +1,56 @@
+<% include partials/header %>
+
+<div class="container clearfix">
+    <% include partials/messages %>
+    <% include partials/userSection %>
+    <section class="mainSection">
+        <section class="greybox" id="activeproj">
+            <h3 class="fl clearfix">Random Questions</h3>
+            <div class="rightFloater">
+                <button class="btnlink fr">
+                    <a href="/p/new" data-icon="&#xe044;">Pop a Question</a>
+                </button>
+            </div>
+            <hr class="line">
+                <% if(projects.length === 0){ %>
+                    <p>No questions have been added yet.</p>
+                <%}else{%>
+                    <ul id="randomUl">
+                        <% projects.forEach(function(project){ %>
+                        <li>
+                            <a href="/p/<%= project._id%>" data-icon="&#xe024;"><%= project.title %></a>
+                        </li>
+                        <% }) // End of projects.forEach;%>
+                    </ul>
+                <% }; %>
+        </section>
+        <section class="greybox">
+        <h3>Recent Activity</h3>
+        <hr class="line"/>
+            <ul id="updateUl">
+            <% projects.reverse().forEach(function(project){ %>
+                <% project.updates.forEach( (update) =>{ %>
+                        <li>
+                            <a href="/p/<%= project.id %>">
+                                <% if(update.username === username) {%>
+                                    <span class="highlight">You</span>
+                                <%} else { %>
+                                    <span class="highlight"><%= update.username %></span> 
+                                <% } %> 
+                                popped a question
+                                <span class="highlight"><%= update.title%></span>
+                                
+                                <span class="highlight"><%= update.lastUpdated.toDateString() +", "+ update.lastUpdated.getHours() +":" + update.lastUpdated.getMinutes()%></span>
+                            </a>
+                            
+                        </li> 
+                        <div class="timeline"></div>
+                <% }); //End of updates.forEach %>
+            <% }); // End of projects.forEach  %>
+            </ul>
+        </section>
+    </section>
+</div>
+
+
+<% include partials/footer %>
