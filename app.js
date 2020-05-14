@@ -17,6 +17,7 @@ const indexRoutes = require("./routes/index"),
   projectRoutes = require("./routes/project");
 
 //MONGODB Connect + Environment Variable
+// ** Configure mongodbAuth variable to your mongodb connection uri
 let mongodbAuth =
   process.env.MONGODBQUESTIONS || "mongodb://localhost:127.0.0.1/questions";
 mongoose.connect(
