@@ -5,9 +5,10 @@
     <% include ../partials/userSection %>
     <section class="mainSection">
         <section class="greybox">
-            <h4 class="fl clearfix"><%= project.title %></h4>
-                    <% if(currentUser && project.author.id.equals(currentUser._id)){ %>
-                    <div class="options rightFloater">
+            <div class="clearfix">
+                <h4 class="fl"><%= project.title %></h4>
+                <% if(currentUser && project.author.id.equals(currentUser._id)){ %>
+                    <div class="options fr">
                         <button class="btnlink">
                             <a href="/p/<%= project.id %>/edit">Edit</a>
                         </button>
@@ -16,6 +17,7 @@
                         </form>
                     </div>
                 <% }; %>
+            </div>
             <hr class="line"/>
             <p><%= project.description %></p>
             <div class="userImgHold simptip-position-bottom simptip-fade" data-tooltip="Admin: <%= project.author.username %>">

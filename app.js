@@ -1,33 +1,37 @@
 const mongoose = require("mongoose"),
-  session = require("express-session"),
-  express = require("express"),
-  app = express();
+    session = require("express-session"),
+    express = require("express"),
+    app = express();
 const MongoStore = require("connect-mongo")(session);
 const flash = require("connect-flash"),
-  cookieParser = require("cookie-parser"),
-  passport = require("passport"),
-  bodyParser = require("body-parser"),
-  LocalStrategy = require("passport-local"),
-  methodOverride = require("method-override"),
-  User = require("./models/user"),
-  Project = require("./models/question");
+    cookieParser = require("cookie-parser"),
+    passport = require("passport"),
+    bodyParser = require("body-parser"),
+    LocalStrategy = require("passport-local"),
+    methodOverride = require("method-override"),
+    User = require("./models/user"),
+    Project = require("./models/question");
 const indexRoutes = require("./routes/index"),
-  homeRoutes = require("./routes/home"),
-  profileRoutes = require("./routes/profile"),
-  projectRoutes = require("./routes/project");
+    homeRoutes = require("./routes/home"),
+    profileRoutes = require("./routes/profile"),
+    projectRoutes = require("./routes/project");
 
 //MONGODB Connect + Environment Variable
 // ** Configure mongodbAuth variable to your mongodb connection uri
 let mongodbAuth =
-  process.env.MONGODBQUESTIONS || "mongodb://localhost:127.0.0.1/questions";
+    process.env.MONGODBQUESTIONS || "mongodb://localhost:127.0.0.1/questions";
 mongoose.connect(
-  mongodbAuth,
-  { useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true },
-  function (err) {
-    if (err) {
-      console.log(err);
+    "mongodb://deethedev:averystrictpassword1414$@localhost:127.0.0.1/questions?authSource=admin",
+    {
+        useNewUrlParser: true,
+        useFindAndModify: false,
+        useUnifiedTopology: true,
+    },
+    function (err) {
+        if (err) {
+            console.log(err);
+        }
     }
-  }
 );
 
 //allows express to track files as .ejs
@@ -39,12 +43,11 @@ app.use(methodOverride("_method")); // allows PUT and DELETE as a post request
 
 // Express session
 app.use(
-  session({
-    secret: "thisbemyquestions",
-    resave: false,
-    saveUninitialized: true,
-    store: new MongoStore({ mongooseConnection: mongoose.connection }),
-  })
+    session({
+        secret: "The Questions",
+        resave: true,
+        saveUninitialized: true,
+    })
 );
 //Connect flash messages
 app.use(flash());
@@ -56,22 +59,22 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 //Global vars
 app.use(async function (req, res, next) {
-  if (req.user) {
-    try {
-      let project = await Project.find({ "author.id": req.user._id });
-      let globalProjects = await Project.find({});
-      res.locals.allProjects = globalProjects;
-      res.locals.currentUserProjects = project;
-    } catch (err) {
-      console.log(err.message);
+    if (req.user) {
+        try {
+            let project = await Project.find({ "author.id": req.user._id });
+            let globalProjects = await Project.find({});
+            res.locals.allProjects = globalProjects;
+            res.locals.currentUserProjects = project;
+        } catch (err) {
+            console.log(err.message);
+        }
     }
-  }
-  res.locals.currentUser = req.user;
-  res.locals.success_msg = req.flash("success_msg");
-  res.locals.error_msg = req.flash("error_msg");
-  res.locals.info_msg = req.flash("info_msg");
-  res.locals.error = req.flash("error");
-  next();
+    res.locals.currentUser = req.user;
+    res.locals.success_msg = req.flash("success_msg");
+    res.locals.error_msg = req.flash("error_msg");
+    res.locals.info_msg = req.flash("info_msg");
+    res.locals.error = req.flash("error");
+    next();
 });
 //Locate Routes
 app.use("/user", indexRoutes); //login and register
@@ -83,5 +86,5 @@ app.use("/profile", profileRoutes);
 const hostname = "127.0.0.1";
 const port = 4040;
 app.listen(port, hostname, () => {
-  console.log(`Server running: http://${hostname}:${port}/`);
+    console.log(`Server running: http://${hostname}:${port}/`);
 });

@@ -5,12 +5,10 @@
     <% include partials/userSection %>
     <section class="mainSection">
         <section class="greybox" id="activeproj">
-            <h3 class="fl clearfix">Random Questions</h3>
-            <div class="rightFloater">
-                <button class="btnlink fr">
-                    <a href="/p/new" data-icon="&#xe044;">Pop a Question</a>
-                </button>
-            </div>
+            <button class="btnlink">
+                <a href="/p/new" data-icon="&#xe044;">Pop a Question</a>
+            </button>
+            <h4>Random Questions</h4>
             <hr class="line">
                 <% if(projects.length === 0){ %>
                     <p>No questions have been added yet.</p>
@@ -25,7 +23,7 @@
                 <% }; %>
         </section>
         <section class="greybox">
-        <h3>Recent Activity</h3>
+        <h4>Recent Activity</h4>
         <hr class="line"/>
             <ul id="updateUl">
             <% projects.reverse().forEach(function(project){ %>

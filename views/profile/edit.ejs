@@ -17,7 +17,7 @@
                 <form action="/profile/<%= currentUser._id %>?_method=PUT" method="POST">
                         <label for="username">Username</label>
                         <input type="text" class="form-control" id="username" name="username" value="<%= currentUser.username %>" aria-describedby="name" placeholder="Your name"/>
-                        <div id="usernameGenerator" onClick="showResults()" class="simptip-position-right simptip-fade" data-tooltip="Generate a random avatar">
+                        <div id="usernameGenerator" onClick="showResults()" class="simptip-position-right simptip-fade" data-tooltip="Generate a random username">
                             <i class="fas fa-random"></i>
                         </div>
                         <button class="btnlink submitBtn">

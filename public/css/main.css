@@ -8,68 +8,69 @@
 
 /* Orig Font */
 @font-face {
-  font-family: "SF Mono Regular";
-  font-style: normal;
-  font-weight: normal;
-  src: local("SF Mono Regular"),
-    url("./fonts/SFMonoRegular.woff") format("woff");
+    font-family: "SF Mono Regular";
+    font-style: normal;
+    font-weight: normal;
+    src: local("SF Mono Regular"),
+        url("./fonts/SFMonoRegular.woff") format("woff");
 }
 @font-face {
-  font-family: "eightyshades";
-  src: url("fonts/eightyshades.eot");
-  src: url("fonts/eightyshades.eot?#iefix") format("embedded-opentype"),
-    url("fonts/eightyshades.woff") format("woff"),
-    url("fonts/eightyshades.ttf") format("truetype"),
-    url("fonts/eightyshades.svg#eightyshades") format("svg");
-  font-weight: normal;
-  font-style: normal;
+    font-family: "eightyshades";
+    src: url("fonts/eightyshades.eot");
+    src: url("fonts/eightyshades.eot?#iefix") format("embedded-opentype"),
+        url("fonts/eightyshades.woff") format("woff"),
+        url("fonts/eightyshades.ttf") format("truetype"),
+        url("fonts/eightyshades.svg#eightyshades") format("svg");
+    font-weight: normal;
+    font-style: normal;
 }
 /* Use data attributes for inserting icons */
 [data-icon]:before {
-  font-family: "eightyshades";
-  content: attr(data-icon);
-  font-weight: normal;
-  -webkit-font-smoothing: antialiased;
-  font-size: 14px;
-  color: inherit;
-  margin-right: 8px;
-  bottom: -2px;
-  position: relative;
+    font-family: "eightyshades";
+    content: attr(data-icon);
+    font-weight: normal;
+    -webkit-font-smoothing: antialiased;
+    font-size: 14px;
+    color: inherit;
+    margin-right: 8px;
+    bottom: -2px;
+    position: relative;
 }
 
 .sfFont {
-  font-family: "SF Mono Regular", sans-serif;
+    font-family: "SF Mono Regular", sans-serif;
 }
 .highlight {
-  color: var(--blue);
-  background-color: #dde6ff;
-  padding: 3px;
+    color: var(--blue);
+    background-color: #dde6ff;
+    padding: 3px;
 }
 /* Font for digits text */
 .digit {
-  font-family: "SF Mono Regular";
-  font-size: 0.7em;
-  color: #007eff;
-  padding: 0px 3px;
-  border-radius: 3px;
-  text-transform: uppercase;
+    font-family: "SF Mono Regular";
+    font-size: 0.7em;
+    color: #007eff;
+    padding: 0px 3px;
+    border-radius: 3px;
+    text-transform: uppercase;
 }
 /* Root Colors */
 :root {
-  --defaultBG: #356cc9;
-  --white: #efefef;
-  --lightgrey: #f7f7f7;
-  --blue: #007eff;
-  --black: #444;
-  --avatarBG: #4e4e4e;
+    --defaultBG: #356cc9;
+    --white: #efefef;
+    --lightgrey: #f7f7f7;
+    --blue: #007eff;
+    --black: #444;
+    --avatarBG: #4e4e4e;
 }
 /* Font Links */
 /* Normalize and Config */
 body {
-  font-family: "Asap", "Open Sans", sans-serif;
-  padding: 0;
-  margin: 0;
-  background-color: var(--defaultBG);
+    font-family: "Asap", "Open Sans", sans-serif;
+    padding: 0;
+    margin: 0;
+    background-color: var(--defaultBG);
+    color: #333;
 }
 h1,
 h2,
@@ -77,358 +78,349 @@ h3,
 h4,
 h5,
 h6 {
-  margin: 10px 0;
-  text-transform: capitalize;
-  font-weight: lighter;
+    margin: 10px 0;
+    text-transform: capitalize;
+    font-weight: lighter;
 }
 h1 {
-  font-size: 1.6em;
-  font-weight: 100;
+    font-size: 1.6em;
+    font-weight: 100;
 }
 h2 {
-  font-size: 1.4em;
-  font-weight: 100;
+    font-size: 1.4em;
+    font-weight: 100;
 }
 h3 {
-  font-size: 1.25em;
-  color: var(--black);
+    font-size: 1.25em;
+    color: var(--black);
 }
 h4 {
-  font-size: 1.1em;
-  color: var(--black);
+    font-size: 1.1em;
+    color: var(--black);
 }
 h5 {
-  font-size: 0.97em;
-  color: var(--black);
+    font-size: 0.97em;
+    color: var(--black);
 }
 h6 {
-  font-size: 0.85em;
-  color: var(--black);
+    font-size: 0.85em;
+    color: var(--black);
 }
 p {
-  font-size: 0.9em;
-  color: #505050;
-  margin: 10px 0;
+    font-size: 0.9em;
+    color: #505050;
+    margin: 10px 0;
 }
 a {
-  color: var(--blue);
-  text-decoration: none;
-  display: inline-block;
-  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-  -moz-box-sizing: border-box; /* Firefox, other Gecko */
-  box-sizing: border-box; /* Opera/IE 8+ */
+    color: var(--blue);
+    text-decoration: none;
+    display: inline-block;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box; /* Firefox, other Gecko */
+    box-sizing: border-box; /* Opera/IE 8+ */
 }
 a:link {
-  color: var(--blue);
+    color: white;
 }
 a:active {
-  color: var(--blue);
+    color: var(--blue);
 }
 a:visited {
-  color: var(--blue);
+    color: inherit;
 }
+
 ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 input:focus,
 button:focus,
 textarea:focus {
-  outline: none;
+    outline: none;
 }
 label {
-  width: 100%;
-  display: block;
-  margin: 15px 0 3px;
-  font-size: 0.9em;
-  color: #404040;
+    width: 100%;
+    display: block;
+    margin: 15px 0 3px;
+    font-size: 0.9em;
+    color: #404040;
 }
 
 textarea {
-  font: inherit;
-  max-width: 100%;
-  max-height: 200px;
-  min-height: 4pc;
+    font: inherit;
+    max-width: 100%;
+    max-height: 200px;
+    min-height: 4pc;
 }
 input,
 textarea {
-  background-color: white;
-  border: 1px solid #989898;
-  padding: 8px;
-  font-size: 0.9em;
-  width: 100%;
-  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-  -moz-box-sizing: border-box; /* Firefox, other Gecko */
-  box-sizing: border-box; /* Opera/IE 8+ */
+    background-color: white;
+    border: 1px solid #dfdfdf;
+    padding: 8px;
+    font-size: 0.9em;
+    width: 100%;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box; /* Firefox, other Gecko */
+    box-sizing: border-box; /* Opera/IE 8+ */
 }
 input:focus,
 textarea:focus {
-  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.09);
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.09);
 }
 .btnlink {
-  display: inline-block;
-  color: white;
-  background: var(--blue);
-  border: 1px solid #0053a9;
-  border-radius: unset;
-  cursor: pointer;
+    display: inline-block;
+    color: white;
+    background: var(--blue);
+    border: 2px solid #0053a9;
+    border-radius: unset;
+    cursor: pointer;
 }
 .btnlink:hover {
-  background: #59abff;
-  border: 1px solid #007dff;
+    background: #59abff;
+    border: 2px solid #007dff;
 }
 
 button {
-  display: inline-block;
-  padding: 0;
+    display: inline-block;
+    padding: 0;
 }
 button a,
 button input {
-  color: var(
-    --white
-  ) !important; /* necessary for overwriting a:link color inherit*/
-  padding: 6px;
-  display: inline-block;
+    color: var(
+        --white
+    ) !important; /* necessary for overwriting a:link color inherit*/
+    padding: 6px;
+    display: inline-block;
 }
 /*Small Hacks*/
 hr.line {
-  width: 100%;
-  border: 0;
-  height: 0;
-  border-top: 1px solid #ddd;
+    border: 0;
+    height: 0;
+    border-top: 1px solid #ddd;
 }
 .fl {
-  float: left;
+    float: left;
 }
 .fr {
-  float: right;
+    float: right;
 }
 .ctr {
-  text-align: center;
+    text-align: center;
 }
 .mauto {
-  margin: 0 auto;
+    margin: 0 auto;
 }
 .clearfix {
-  overflow: auto;
+    overflow: auto;
 }
 .clearfix::after {
-  content: "";
-  clear: both;
-  display: table;
+    content: "";
+    clear: both;
+    display: table;
 }
 /* https://www.w3schools.com/howto/howto_css_clearfix.asp */
 
-/* HOMEPAGE STYLE BELOW */
+/*--------------------- HOMEPAGE STYLE BELOW ---------------------------*/
 img.admin {
-  -webkit-box-shadow: 0px 0px 0px 2px gold;
-  -moz-box-shadow: 0px 0px 0px 2px gold;
-  box-shadow: 0px 0px 0px 2px gold;
+    -webkit-box-shadow: 0px 0px 0px 2px gold;
+    -moz-box-shadow: 0px 0px 0px 2px gold;
+    box-shadow: 0px 0px 0px 2px gold;
 }
 img.user {
-  display: block;
-  width: 100%;
-  height: 100%;
-  border-radius: 3px;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 3px;
 }
 .userImgHold {
-  position: relative;
-  display: inline-block;
-  height: 20px;
-  width: 20px;
-  background-color: #ffffff;
-  vertical-align: middle;
-  align-items: center;
-  border-radius: 3px;
-  padding: 1px;
-  margin-right: 3px;
+    position: relative;
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+    background-color: #ffffff;
+    vertical-align: middle;
+    align-items: center;
+    border-radius: 3px;
+    padding: 1px;
+    margin-right: 3px;
 }
 nav {
-  position: relative !important;
-  background: #f5f5f5;
-  border-bottom: 1px solid #ddd;
+    position: relative !important;
+    background: #f5f5f5;
+    border-bottom: 1px solid #ddd;
 }
 #logged {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  padding: 0 10px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    padding: 0 10px;
 }
 nav .navigation {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
 }
 nav .navigation a {
-  color: #444;
+    color: #444;
 }
 nav .navigation ul.nav-list {
-  display: flex;
-  flex-direction: row;
-  margin: 0;
+    display: flex;
+    flex-direction: row;
+    margin: 0;
 }
 nav .navigation ul.nav-list li {
-  list-style: none;
+    list-style: none;
 }
 nav .navigation ul.nav-list li a {
-  display: inline-block;
-  padding: 10px;
-  font-size: 0.9em;
+    display: inline-block;
+    padding: 10px;
+    font-size: 0.9em;
 }
 
 /* Main CSS */
 .container {
-  position: relative;
-  max-width: 1000px;
-  width: 100%;
-  margin: 0 auto;
+    position: relative;
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
 }
 .userSection {
-  float: left;
-  width: 25%;
-  padding: 15px;
-  background-color: #f3f3f3;
-  box-sizing: border-box;
+    float: left;
+    width: 25%;
+    padding: 15px;
+    background-color: #f3f3f3;
+    box-sizing: border-box;
 }
 .userSection .proImgHolder {
-  width: 50px;
-  height: 50px;
-  margin: 0 auto 10px;
+    width: 50px;
+    height: 50px;
+    margin: 0 auto 10px;
 }
 .userSection .proNameHolder {
-  text-align: center;
+    text-align: center;
+    text-transform: capitalize;
 }
 .mainSection {
-  float: left;
-  width: 75%;
+    float: left;
+    width: 75%;
 }
 .greybox {
-  position: relative;
-  padding: 15px;
-  background-color: #f3f3f3;
-  border-left: 1px solid #ddd;
-  border-right: 1px solid #ddd;
+    position: relative;
+    padding: 15px;
+    background-color: #f3f3f3;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
 }
 .greybox:last-of-type {
-  border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
 }
 
 .greybox h1,
 h2,
-h3,
-h4,
 h5,
 h6 {
-  margin-top: 0px;
-}
-.rightFloater {
-  float: right;
-  position: relative;
-  top: -5px;
+    margin-top: 0px;
 }
 
 /* -- Random Questions Section Style -- */
 ul#randomUl li {
-  margin: 3px 0;
-  background-color: #3e3e3e;
-  border-radius: 3px;
-  border: 1px solid #444;
+    margin: 3px 0;
+    background-color: rgb(240, 77, 77);
+    border: 1px solid rgb(201, 53, 53);
+    color: white;
 }
 ul#randomUl li a {
-  width: 100%;
-  padding: 8px;
-  color: #e0e0e0;
+    width: 100%;
+    padding: 8px;
 }
 ul#randomUl li:hover {
-  background-color: rgb(240, 77, 77);
-  border: 1px solid rgb(201, 53, 53);
-}
-ul#randomUl li:hover > a {
-  color: white;
+    background-color: rgb(240, 77, 77);
+    border: 1px solid rgb(201, 53, 53);
+    opacity: 0.8;
 }
 
 /* -- Recent Activity Section Style -- */
 .timeline {
-  position: relative;
-  height: 4px;
-  width: 4px;
-  background-color: #c8d8ff;
-  margin-left: 4px;
+    position: relative;
+    height: 4px;
+    width: 4px;
+    background-color: #c8d8ff;
+    margin-left: 4px;
 }
 .timelineExtend {
-  height: 12px;
-  width: 8px;
-  background-color: #5c87ff;
-  margin-left: 4px;
+    height: 12px;
+    width: 8px;
+    background-color: #5c87ff;
+    margin-left: 4px;
 }
 #updateUl {
-  font-size: 13px;
-  color: var(--black);
-  margin: 0;
-  padding: 0;
+    font-size: 13px;
+    color: var(--black);
+    margin: 0;
+    padding: 0;
 }
 #updateUl li {
-  background-color: #f2f5ff;
-  border: 1px solid#c8d8ff;
+    background-color: #f2f5ff;
+    border: 1px solid#c8d8ff;
 }
 #updateUl li:hover {
-  border: 1px solid#81a5ff;
-  cursor: pointer;
+    border: 1px solid#81a5ff;
+    cursor: pointer;
 }
 #updateUl li a {
-  width: 100%;
-  padding: 5px;
-  color: var(--black);
+    width: 100%;
+    padding: 5px;
+    color: var(--black);
 }
 
 /*-- REGISTER /IMAGE PICKER --*/
 .imagePicker {
-  display: inline-block;
-  z-index: 1;
+    display: inline-block;
+    z-index: 1;
 }
 #inputFile {
-  display: none;
+    display: none;
 }
 .imagePicker > .loading {
-  z-index: 3;
-  position: absolute;
-  display: block;
-  width: 40px;
-  height: 40px;
-  background-color: rgba(0, 0, 0, 0.6);
-  background-position: center;
-  background-size: 20px 20px;
-  border-radius: 3px;
+    z-index: 3;
+    position: absolute;
+    display: block;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(0, 0, 0, 0.6);
+    background-position: center;
+    background-size: 20px 20px;
+    border-radius: 3px;
 }
 .avatarHold {
-  margin: 0;
-  z-index: 2;
+    margin: 0;
+    z-index: 2;
 }
 #ranAvatarBtn {
-  font-size: 12px;
-  color: white;
-  background-color: var(--blue);
-  padding: 3px;
-  border-radius: 3px;
-  margin: 3px 0;
-  cursor: pointer;
+    font-size: 12px;
+    color: white;
+    background-color: var(--blue);
+    padding: 3px;
+    border-radius: 3px;
+    margin: 3px 0;
+    cursor: pointer;
 }
 #ranAvatarBtn:active {
-  box-shadow: inset 0 0 5px 2px #004082;
+    box-shadow: inset 0 0 5px 2px #004082;
 }
 .avatarPreview {
-  width: 40px;
-  height: 40px;
-  border-radius: 3px;
-  cursor: pointer;
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-color: var(--avatarBG);
+    width: 40px;
+    height: 40px;
+    border-radius: 3px;
+    cursor: pointer;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: var(--avatarBG);
 }
 .imagePreview:hover {
-  -webkit-box-shadow: 0px 0px 0px 1px var(--blue);
-  -moz-box-shadow: 0px 0px 0px 1px var(--blue);
-  box-shadow: 0px 0px 0px 1px var(--blue);
+    -webkit-box-shadow: 0px 0px 0px 1px var(--blue);
+    -moz-box-shadow: 0px 0px 0px 1px var(--blue);
+    box-shadow: 0px 0px 0px 1px var(--blue);
 }
