@@ -25,11 +25,11 @@ router.get("/register", function (req, res) {
 
 //Create new user
 router.post("/register", function (req, res) {
-    var { username, profileImg, password, password2 } = req.body;
+    let { username, profileImg, password, password2 } = req.body;
     let errors = [];
 
     //check required fields
-    if (!username || !password || !password2) {
+    if (!username.trim() || !password || !password2) {
         errors.push({ msg: "Fill in all fields that apply" });
     }
     //check passwords match
@@ -59,10 +59,7 @@ router.post("/register", function (req, res) {
                     username: username,
                     profileImg: profileImg,
                 };
-                User.register(new User(userInfo), req.body.password, function (
-                    err,
-                    user
-                ) {
+                User.register(new User(userInfo), password, function (err) {
                     if (err) {
                         console.log(err);
                     } else {
