@@ -1,8 +1,9 @@
+// Mongodb session and core packages
 const mongoose = require("mongoose"),
     session = require("express-session"),
     express = require("express"),
     app = express();
-const MongoStore = require("connect-mongo")(session);
+//Utilities packages
 const flash = require("connect-flash"),
     cookieParser = require("cookie-parser"),
     passport = require("passport"),
@@ -11,17 +12,19 @@ const flash = require("connect-flash"),
     methodOverride = require("method-override"),
     User = require("./models/user"),
     Project = require("./models/question");
+//Require routes
 const indexRoutes = require("./routes/index"),
     homeRoutes = require("./routes/home"),
     profileRoutes = require("./routes/profile"),
     projectRoutes = require("./routes/project");
+//Environment Variables
+require("dotenv").config();
 
 //MONGODB Connect + Environment Variable
-// ** Configure mongodbAuth variable to your mongodb connection uri
-let mongodbAuth =
-    process.env.MONGODBQUESTIONS || "mongodb://localhost:127.0.0.1/questions";
+// ** CONFIGURE MONGODB VARIABLE TO YOUR CONFIGURATIONS
+const MONGODB_URL = process.env.MONGODB_URL;
 mongoose.connect(
-    "mongodb://deethedev:averystrictpassword1414$@localhost:127.0.0.1/questions?authSource=admin",
+    MONGODB_URL,
     {
         useNewUrlParser: true,
         useFindAndModify: false,

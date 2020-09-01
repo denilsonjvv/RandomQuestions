@@ -1,5 +1,5 @@
 {
-    "name": "collabo",
+    "name": "questions",
     "version": "1.1.1",
     "description": "A simple team management web app that aims to reach steady results for your projects.",
     "main": "app.js",
@@ -22,7 +22,7 @@
         "cookie-parser": "^1.4.5",
         "cors": "^2.8.5",
         "ejs": "^2.7.4",
-        "ejs-lint": "^0.3.0",
+        "ejs-lint": "^1.1.0",
         "express": "^4.17.1",
         "express-session": "^1.17.1",
         "formidable": "^1.2.2",
@@ -38,5 +38,7 @@
         "quill-delta": "^4.2.2",
         "random-words": "^1.1.1"
     },
-    "devDependencies": {}
+    "devDependencies": {
+        "dotenv": "^8.2.0"
+    }
 }

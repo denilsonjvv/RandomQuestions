@@ -25,11 +25,11 @@
                         <p style="text-align:center">You haven't asked a question yet, <a href="/p/new" data-icon="&#xe044;">Pop a Question</a></p>
                     <%} else {%>
                         <h5>Your Questions</h5>
-                        <ol id="listProjects">
-                            <% currentUserProjects.forEach(function(project){ %>
+                        <ul id="listProjects">
+                            <% currentUserProjects.reverse().forEach(function(project){ %>
                                 <li><a href="/p/<%= project.id %>" class="mauto"><%= project.title %></a></li>
                             <% });%>
-                        </ol>
+                        </ul>
                     <% }%>
             </section>
         </div>

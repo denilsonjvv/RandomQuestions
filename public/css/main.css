@@ -120,7 +120,7 @@ a {
     box-sizing: border-box; /* Opera/IE 8+ */
 }
 a:link {
-    color: white;
+    color: inherit;
 }
 a:active {
     color: var(--blue);

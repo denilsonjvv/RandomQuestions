@@ -25,44 +25,40 @@ router.get("/:id", auth.userIsLogged, function (req, res) {
 });
 //CREATE new project
 router.post("/", auth.userIsLogged, function (req, res) {
-    // Variables
-    //req.body Form Information Reciever
-    var { title, description } = req.body;
-    var author = {
-        id: req.user._id,
-        username: req.user.username,
-        profileImg: req.user.profileImg,
+    //req.body information from form
+    let { title, description } = req.body;
+    //req.user information from logged in user
+    let { _id, username, profileImg } = req.user;
+    const author = {
+        id: _id,
+        username,
+        profileImg,
     };
-    var newProject = {
-        title: title,
-        description: description,
-        author: author,
+    const infoFields = {
+        title,
+        description,
+        author,
     };
     //Error handling
     let errors = [];
     //check required fields
-    if (!title || !description) {
+    if (!title.trim() || !description.trim()) {
         errors.push({ msg: "Fill in all fields please" });
     }
-    //check passwords match
-    // if (password !== password2) {
-    //   errors.push({ msg: "Passwords do not match" });
-    // }
     if (errors.length > 0) {
         res.render("projects/new", { errors, title, description });
     } else {
         //Create a new and save to database
-        Project.create(newProject, function (err, newQuestion) {
+        Project.create(infoFields, function (err, newQuestion) {
             if (err) {
                 console.log(err);
             } else {
-                let questionInfo = {
+                let updatesInfo = {
                     id: newQuestion._id,
-                    username: author.username,
+                    username,
                     title,
                 };
-                console.log(questionInfo);
-                Updates.create(questionInfo, function (err, newlyUpdated) {
+                Updates.create(updatesInfo, function (err, newlyUpdated) {
                     if (err) {
                         console.log("Could not create update schema." + err);
                     } else {
