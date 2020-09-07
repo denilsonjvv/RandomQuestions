@@ -1,86 +1,24 @@
-let express = require("express");
-let router = express.Router({ mergeParams: true });
-let passport = require("passport"),
-    User = require("../models/user");
+const express = require("express");
+const router = express.Router({ mergeParams: true });
+const { postRegister, postLogin, logout } = require("../controllers/index");
 
 // AUTH ROUTES
-router.get("/login", function (req, res) {
+router.get("/login", (req, res) => {
     res.render("login");
 });
-
-router.post(
-    "/login",
-    passport.authenticate("local", {
-        successRedirect: "/",
-        failureRedirect: "/user/login",
-        failureFlash: true,
-    }),
-    function (req, res) {}
-);
+//Post login from conroller
+router.post("/login", postLogin);
 
 //Show register form
-router.get("/register", function (req, res) {
+router.get("/register", (req, res) => {
     res.render("register");
 });
 
 //Create new user
-router.post("/register", function (req, res) {
-    let { username, profileImg, password, password2 } = req.body;
-    let errors = [];
-
-    //check required fields
-    if (!username.trim() || !password || !password2) {
-        errors.push({ msg: "Fill in all fields that apply" });
-    }
-    //check passwords match
-    if (password !== password2) {
-        errors.push({ msg: "Passwords do not match" });
-    }
-    // Check pass length
-    if (password.length < 6) {
-        errors.push({ msg: "Password should be at least 6 characters" });
-    }
-    if (errors.length > 0) {
-        res.render("register", { errors, username, password, password2 });
-    } else {
-        //validate passed
-        User.findOne({ username }, function (err, user) {
-            if (user) {
-                //User exists
-                errors.push({ msg: "Username is already registered" });
-                res.render("register", {
-                    errors,
-                    username,
-                    password,
-                    password2,
-                });
-            } else {
-                var userInfo = {
-                    username: username,
-                    profileImg: profileImg,
-                };
-                User.register(new User(userInfo), password, function (err) {
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        req.flash(
-                            "success_msg",
-                            "You are now registered and can log in"
-                        );
-                        res.redirect("login");
-                    }
-                });
-            }
-        });
-    }
-});
+router.post("/register", postRegister);
 
 //Logout Handler
-router.get("/logout", function (req, res) {
-    req.logout();
-    req.flash("success_msg", "You are logged out");
-    res.redirect("/user/login");
-});
+router.get("/logout", logout);
 
 //Global Router
 module.exports = router;

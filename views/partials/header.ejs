@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>collabO - Team Up</title>
+    <title>Random Questions - Development</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" href="/css/main.css" />
     <link rel="stylesheet" type="text/css" href="/css/tooltip/simptip.css" />
@@ -24,11 +24,9 @@
     <nav>
         <div id="logged"class="fl clearfix">
           <% if(currentUser){ %>
-            <span class="digit sfFont">
               <a href="/profile/<%= currentUser._id %>">
-                COLLABO BETA Logged In As <%= currentUser.name %> - ID <%= currentUser._id %>
+                <span class="digit sfFont"><%= currentUser.username %> - <%= currentUser._id %></span>
               </a>
-            </span>
           <% }else{ %>
                 <span class="digit sfFont">No user logged in</span>
           <% } %>

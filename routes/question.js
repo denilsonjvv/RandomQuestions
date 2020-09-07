@@ -1,135 +1,30 @@
-var express = require("express");
-var router = express.Router({ mergeParams: true });
-
-var Project = require("../models/question"),
-    User = require("../models/user"),
-    Task = require("../models/task"),
-    Updates = require("../models/updates"),
-    auth = require("../config/auth"); // connect to auth file to authorize.
+const express = require("express");
+const router = express.Router({ mergeParams: true });
+let auth = require("../config/auth"); // connect to auth file to authorize.
+//import methods from controller
+const {
+    showQuestion,
+    createQuestion,
+    showEditQuestion,
+    updateQuestion,
+    deleteQuestion,
+} = require("../controllers/question");
 
 //Show Post Form
-router.get("/new", auth.userIsLogged, function (req, res) {
-    res.render("projects/new", { user: req.user });
+router.get("/new", auth.userIsLogged, (req, res) => {
+    res.render("questions/new", { user: req.user });
 });
 //SHOW project page
-router.get("/:id", auth.userIsLogged, function (req, res) {
-    Project.findById(req.params.id)
-        .populate("tasks")
-        .exec(function (err, foundProject) {
-            if (err) {
-                res.render("errors/project", { projectID: req.params.id }); // First Error Handling Page
-            } else {
-                res.render("projects/show", { project: foundProject });
-            }
-        });
-});
+router.get("/:id", auth.userIsLogged, showQuestion);
 //CREATE new project
-router.post("/", auth.userIsLogged, function (req, res) {
-    //req.body information from form
-    let { title, description } = req.body;
-    //req.user information from logged in user
-    let { _id, username, profileImg } = req.user;
-    const author = {
-        id: _id,
-        username,
-        profileImg,
-    };
-    const infoFields = {
-        title,
-        description,
-        author,
-    };
-    //Error handling
-    let errors = [];
-    //check required fields
-    if (!title.trim() || !description.trim()) {
-        errors.push({ msg: "Fill in all fields please" });
-    }
-    if (errors.length > 0) {
-        res.render("projects/new", { errors, title, description });
-    } else {
-        //Create a new and save to database
-        Project.create(infoFields, function (err, newQuestion) {
-            if (err) {
-                console.log(err);
-            } else {
-                let updatesInfo = {
-                    id: newQuestion._id,
-                    username,
-                    title,
-                };
-                Updates.create(updatesInfo, function (err, newlyUpdated) {
-                    if (err) {
-                        console.log("Could not create update schema." + err);
-                    } else {
-                        newlyUpdated.save();
-                        newQuestion.updates.push(newlyUpdated);
-                        newQuestion.save();
-                        //successfully added data to update
-                        // NOTE: This will need to be refactored/modified for better error handling
-                        req.flash(
-                            "success_msg",
-                            "Your new project has been created, check it out below!"
-                        );
-                        res.redirect("/p/" + newQuestion._id + "/"); //redirect back to show page
-                    }
-                });
-            }
-        });
-    } //End if statement
-});
+router.post("/", auth.userIsLogged, createQuestion);
 
 //Edit project page
-router.get("/:id/edit", auth.checkIfOwner, auth.userIsLogged, function (
-    req,
-    res
-) {
-    Project.findById(req.params.id, function (err, project) {
-        if (err) {
-            req.flash(
-                "info_msg",
-                "There was a problem accessing your project, try again."
-            );
-            res.redirect("/");
-        } else {
-            res.render("projects/edit", { project });
-        }
-    });
-});
+router.get("/:id/edit", auth.userIsLogged, auth.checkIfOwner, showEditQuestion);
 //UPDATE project page
-router.put("/:id", auth.checkIfOwner, auth.userIsLogged, function (req, res) {
-    Project.findByIdAndUpdate(req.params.id, req.body.project, function (
-        err,
-        project
-    ) {
-        if (err) {
-            req.flash(
-                "info_msg",
-                "There was a problem updating your project, try again."
-            );
-            res.redirect("back");
-        } else {
-            req.flash(
-                "success_msg",
-                "Your project page has been updated successfully."
-            );
-            res.redirect("/p/" + project._id);
-        }
-    });
-});
+router.put("/:id", auth.userIsLogged, auth.checkIfOwner, updateQuestion);
 //DESTROY project page
-router.delete("/:id", auth.userIsLogged, auth.checkIfOwner, function (
-    req,
-    res,
-    next
-) {
-    Project.findById(req.params.id, function (err, project) {
-        if (err) return next(err);
-        project.delete();
-        // Need to add flash message for deletion confirmation
-        res.redirect("/");
-    });
-});
+router.delete("/:id", auth.userIsLogged, auth.checkIfOwner, deleteQuestion);
 
 // //Assign users to project Page
 // router.get("/:id/assign", auth.checkIfOwner, auth.userIsLogged, function (
@@ -145,7 +40,7 @@ router.delete("/:id", auth.userIsLogged, auth.checkIfOwner, function (
 //       res.redirect("/");
 //     } else {
 //       User.find({}, function (err, foundUsers) {
-//         res.render("projects/assign", { project, users: foundUsers });
+//         res.render("questions/assign", { project, users: foundUsers });
 //       });
 //     }
 //   });

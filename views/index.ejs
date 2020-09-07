@@ -1,54 +1,33 @@
 <% include partials/header %>
 
 <div class="container clearfix">
-    <% include partials/messages %>
     <% include partials/userSection %>
+    <% include partials/messages %>
     <section class="mainSection">
         <section class="greybox" id="activeproj">
             <button class="btnlink">
                 <a href="/p/new" data-icon="&#xe044;">Pop a Question</a>
             </button>
-            <h4>Random Questions</h4>
+            <h3>Random Questions</h3>
             <hr class="line">
-                <% if(projects.length === 0){ %>
+                <% if(questions.length === 0){ %>
                     <p>No questions have been added yet.</p>
                 <%}else{%>
-                    <ul id="randomUl">
-                        <% projects.forEach(function(project){ %>
+                    <ul class="randomUl">
+                        <% questions.reverse().forEach(function(question){ %>
                         <li>
-                            <a href="/p/<%= project._id%>" data-icon="&#xe024;"><%= project.title %></a>
+                            <a href="/p/<%= question._id%>" data-icon="&#xe024;">
+                            <div class="userImgHold simptip-position-top simptip-fade" data-tooltip="Author: <%= question.author.username %>">
+                                <img src="/pro-img/<%= question.author.profileImg %>" class="user">
+                            </div>
+                                <%= question.title %>
+                            </a>
                         </li>
                         <% }) // End of projects.forEach;%>
                     </ul>
                 <% }; %>
         </section>
-        <section class="greybox">
-        <h4>Recent Activity</h4>
-        <hr class="line"/>
-            <ul id="updateUl">
-            <% projects.reverse().forEach(function(project){ %>
-                <% project.updates.forEach( (update) =>{ %>
-                        <li>
-                            <a href="/p/<%= project.id %>">
-                                <% if(update.username === username) {%>
-                                    <span class="highlight">You</span>
-                                <%} else { %>
-                                    <span class="highlight"><%= update.username %></span> 
-                                <% } %> 
-                                popped a question
-                                <span class="highlight"><%= update.title%></span>
-                                
-                                <span class="highlight"><%= update.lastUpdated.toDateString() +", "+ update.lastUpdated.getHours() +":" + update.lastUpdated.getMinutes()%></span>
-                            </a>
-                            
-                        </li> 
-                        <div class="timeline"></div>
-                <% }); //End of updates.forEach %>
-            <% }); // End of projects.forEach  %>
-            </ul>
-        </section>
     </section>
 </div>
-
 
 <% include partials/footer %>

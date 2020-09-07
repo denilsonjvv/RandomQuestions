@@ -1,0 +1,28 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <% include ../partials/messages %>
+    <% include ../partials/profileUserSection %>
+    <section class="mainSection">
+            <section class="greybox">
+                <h3>Settings &middot; Change username</h3>
+                <hr class="line"/>
+                <form action="/profile/<%= currentUser._id %>/changeUsername?_method=PUT" method="POST">
+                        <label>
+                            Username                         
+                            <span id="usernameGenerator" class="simptip-position-right simptip-fade" data-tooltip="Generate a random username">
+                            <i class="fas fa-random"></i>
+                        </span></label>
+                        <input type="text" class="form-control" id="username" name="username" value="<%= currentUser.username %>" aria-describedby="name" placeholder="New username"/>
+                        <label for="currentPassword">Confirm password</label>
+                        <input type="password" class="form-control" id="currentPassword" name="currentPassword"  aria-describedby="name" placeholder="Current password"/>
+                        <button class="btnlink submitBtn">
+                            Update
+                        </button>
+                </form>
+            </section>
+    </section>
+</div>
+<script src="../../js/renderUsername.js"></script>
+
+<% include ../partials/footer %>  

@@ -4,30 +4,24 @@
 
 
 <div class="container">
-    <section class="userSection">
-        <div class="proImgHolder">
-            <img src="/pro-img/<%= currentUser.profileImg %>" class="user">
-        </div>
-        <div class="proNameHolder">
-            <a class="btn btn-primary btn-sm" href="/profile/<%= currentUser.id %>/edit">Edit Profile</a>
-        </div>
-    </section>
+    <% include ../partials/profileUserSection %>
     <section class="mainSection">
         <div class="profile-head">
             <section class="greybox">
-                <h3>
+                <h3>Profile</h3>
+                 <hr class="line">
+                <h4>
                 <%= currentUser.username %>
-                </h3>
-                <hr class="line"/>
+                </h4>
                 <p><b>Registered Since: </b><%= currentUser.date.toDateString() %></p>
                 <hr class="line"/>
                     <% if(currentUserProjects.length== 0){ %>
                         <p style="text-align:center">You haven't asked a question yet, <a href="/p/new" data-icon="&#xe044;">Pop a Question</a></p>
                     <%} else {%>
                         <h5>Your Questions</h5>
-                        <ul id="listProjects">
+                        <ul class="randomUl">
                             <% currentUserProjects.reverse().forEach(function(project){ %>
-                                <li><a href="/p/<%= project.id %>" class="mauto"><%= project.title %></a></li>
+                                <li><a href="/p/<%= project.id %>" class="mauto" data-icon="&#xe024;"><%= project.title %></a></li>
                             <% });%>
                         </ul>
                     <% }%>

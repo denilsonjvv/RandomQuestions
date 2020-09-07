@@ -42,8 +42,7 @@
 }
 .highlight {
     color: var(--blue);
-    background-color: #dde6ff;
-    padding: 3px;
+    font-weight: bold;
 }
 /* Font for digits text */
 .digit {
@@ -79,7 +78,6 @@ h4,
 h5,
 h6 {
     margin: 10px 0;
-    text-transform: capitalize;
     font-weight: lighter;
 }
 h1 {
@@ -222,11 +220,6 @@ hr.line {
 /* https://www.w3schools.com/howto/howto_css_clearfix.asp */
 
 /*--------------------- HOMEPAGE STYLE BELOW ---------------------------*/
-img.admin {
-    -webkit-box-shadow: 0px 0px 0px 2px gold;
-    -moz-box-shadow: 0px 0px 0px 2px gold;
-    box-shadow: 0px 0px 0px 2px gold;
-}
 img.user {
     display: block;
     width: 100%;
@@ -287,7 +280,7 @@ nav .navigation ul.nav-list li a {
 }
 .userSection {
     float: left;
-    width: 25%;
+    width: 30%;
     padding: 15px;
     background-color: #f3f3f3;
     box-sizing: border-box;
@@ -299,11 +292,10 @@ nav .navigation ul.nav-list li a {
 }
 .userSection .proNameHolder {
     text-align: center;
-    text-transform: capitalize;
 }
 .mainSection {
     float: left;
-    width: 75%;
+    width: 70%;
 }
 .greybox {
     position: relative;
@@ -324,27 +316,24 @@ h6 {
 }
 
 /* -- Random Questions Section Style -- */
-ul#randomUl li {
+ul.randomUl li {
     margin: 3px 0;
-    background-color: rgb(240, 77, 77);
-    border: 1px solid rgb(201, 53, 53);
-    color: white;
+    border: 1px solid #ccc;
+    border-radius: 3px;
 }
-ul#randomUl li a {
+ul.randomUl li a {
     width: 100%;
     padding: 8px;
 }
-ul#randomUl li:hover {
-    background-color: rgb(240, 77, 77);
-    border: 1px solid rgb(201, 53, 53);
-    opacity: 0.8;
+ul.randomUl li:hover {
+    border: 1px solid #aaa;
 }
 
 /* -- Recent Activity Section Style -- */
 .timeline {
     position: relative;
-    height: 4px;
-    width: 4px;
+    height: 10px;
+    width: 1px;
     background-color: #c8d8ff;
     margin-left: 4px;
 }
@@ -363,10 +352,10 @@ ul#randomUl li:hover {
 #updateUl li {
     background-color: #f2f5ff;
     border: 1px solid#c8d8ff;
+    border-radius: 3px;
 }
 #updateUl li:hover {
-    border: 1px solid#81a5ff;
-    cursor: pointer;
+    border: 1px solid #9db9ff;
 }
 #updateUl li a {
     width: 100%;

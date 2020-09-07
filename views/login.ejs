@@ -3,16 +3,16 @@
 <div class="container" style="width: 600px">
       <% include ./partials/messages %>
   <div class="greybox">
-      <h1>collabO TEST - <span style="color: var(--blue)">Login</span></h1>
+      <h1>Random Questions - <span style="color: var(--blue)">Login</span></h1>
       <hr class="line"/>
       <form action="/user/login" method="POST">
         <div class="block">
           <label for="email">Username</label>
-          <input type="text"  id="email"  name="username"  class="form-control"  placeholder="Enter Email"/>
+          <input type="text"  id="email"  name="username"  class="form-control"/>
         </div>
         <div class="block">
           <label for="password">Password</label>
-          <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password" />
+          <input type="password" id="password" name="password" class="form-control" placeholder="*********" />
         </div>
         <button type="submit" class="submitBtn btnlink">Login</button>
       </form>
