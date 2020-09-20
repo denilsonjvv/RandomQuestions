@@ -18,7 +18,6 @@ router.get("/new", auth.userIsLogged, (req, res) => {
 router.get("/:id", auth.userIsLogged, showQuestion);
 //CREATE new project
 router.post("/", auth.userIsLogged, createQuestion);
-
 //Edit project page
 router.get("/:id/edit", auth.userIsLogged, auth.checkIfOwner, showEditQuestion);
 //UPDATE project page

@@ -9,12 +9,12 @@ module.exports = {
             failureFlash: true,
         })(req, res, next);
     },
-    logout(req, res, next) {
+    logout(req, res) {
         req.logout();
         req.flash("success_msg", "You are logged out");
         res.redirect("/user/login");
     },
-    postRegister(req, res, next) {
+    postRegister(req, res) {
         let { username, profileImg, password, password2 } = req.body;
         let errors = [];
 

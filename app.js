@@ -12,11 +12,6 @@ const flash = require("connect-flash"),
     User = require("./models/user"),
     Project = require("./models/question"),
     Updates = require("./models/updates");
-//Require routes
-const indexRoutes = require("./routes/index"),
-    homeRoutes = require("./routes/home"),
-    profileRoutes = require("./routes/profile"),
-    questionRoutes = require("./routes/question");
 //Environment Variables
 require("dotenv").config();
 
@@ -87,6 +82,11 @@ app.use(async function (req, res, next) {
     res.locals.error = req.flash("error");
     next();
 });
+//Require routes
+const indexRoutes = require("./routes/index"),
+    homeRoutes = require("./routes/home"),
+    profileRoutes = require("./routes/profile"),
+    questionRoutes = require("./routes/question");
 //Locate Routes
 app.use("/user", indexRoutes); //login and register
 app.use(homeRoutes); //  "/"
