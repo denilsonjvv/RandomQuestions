@@ -5,34 +5,34 @@ var bcrypt = require("bcryptjs");
 var User = require("../models/user");
 
 module.exports = function (passport) {
+    //LocalStrategy param1: options , param2, creds to verify
     passport.use(
         new LocalStrategy(
             { usernameField: "username" },
             (username, password, done) => {
-                // Match User
-                User.findOne(username, function (err, user) {
-                    if (err) {
-                        return done(err);
-                    }
-                    if (!user) {
-                        return done(null, false, {
-                            message: "Username or password incorrect",
-                        });
-                    }
-                    bcrypt.compare(password, user.password, function (
-                        err,
-                        isMatch
-                    ) {
-                        if (isMatch) {
-                            return done(null, user);
-                        } else {
+                User.findOne({ username })
+                    .then((user) => {
+                        if (!user)
                             return done(null, false, {
                                 message: "Username or password incorrect",
                             });
-                        }
-                    });
-                    return done(null, user);
-                });
+                        bcrypt.compare(
+                            password,
+                            user.password,
+                            (err, isMatch) => {
+                                if (isMatch) {
+                                    return done(null, user);
+                                } else {
+                                    return done(null, false, {
+                                        message:
+                                            "Username or password incorrect",
+                                    });
+                                }
+                            }
+                        );
+                        return done(null, user);
+                    })
+                    .catch((err) => console.log(err));
             }
         )
     );
