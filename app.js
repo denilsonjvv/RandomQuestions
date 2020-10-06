@@ -12,8 +12,6 @@ const flash = require("connect-flash"),
     User = require("./models/user"),
     Project = require("./models/question"),
     Updates = require("./models/updates");
-//Environment Variables
-require("dotenv").config();
 
 //MONGODB Connect + Environment Variable
 // ** CONFIGURE MONGODB VARIABLE TO YOUR CONFIGURATIONS
