@@ -30,7 +30,7 @@
           <% project.members.forEach(function(member){ %>
             <input type="checkbox" id="assigned" name="assigned" value="<%= member.name %>" aria-describedby="assigned">
                 <img src="/pro-img/<%=member.profileImg%>"><%= member.name %>
-            </input><br>
+            <br>
           <% }); %>
       </div>
       <div class="block">
