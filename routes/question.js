@@ -8,6 +8,11 @@ const {
     showEditQuestion,
     updateQuestion,
     deleteQuestion,
+    showCommentForm,
+    postNewComment,
+    editComment,
+    updateComment,
+    deleteQuestionComment
 } = require("../controllers/question");
 
 //Show Post Form
@@ -16,16 +21,29 @@ router.get("/new", auth.userIsLogged, (req, res) => {
 });
 //SHOW project page
 router.get("/:id", auth.userIsLogged, showQuestion);
-//CREATE new project
+//CREATE new question
 router.post("/", auth.userIsLogged, createQuestion);
-//Edit project page
+//Edit question page
 router.get("/:id/edit", auth.userIsLogged, auth.checkIfOwner, showEditQuestion);
-//UPDATE project page
+//UPDATE question page
 router.put("/:id", auth.userIsLogged, auth.checkIfOwner, updateQuestion);
-//DESTROY project page
+//DESTROY question page
 router.delete("/:id", auth.userIsLogged, auth.checkIfOwner, deleteQuestion);
 
-// //Assign users to project Page
+//QUESTION COMMENTS ROUTES
+//SHOW new comment page
+router.get("/:id/comment/new", auth.userIsLogged, showCommentForm);
+//CREATE comment page
+router.post("/:id/comment", auth.userIsLogged, postNewComment);
+//EDIT comment page
+router.get("/:id/comment/:comment_id/edit",auth.userIsLogged, editComment)
+//UPDATE comment
+router.put("/:id/comment/:comment_id", auth.userIsLogged, updateComment)
+router.delete("/:id/comment/:comment_id", auth.userIsLogged, auth.checkIfCommentOwner, deleteQuestionComment);
+
+
+
+// //Assign users to question Page
 // router.get("/:id/assign", auth.checkIfOwner, auth.userIsLogged, function (
 //   req,
 //   res

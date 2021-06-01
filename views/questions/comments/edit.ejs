@@ -1,0 +1,16 @@
+<% include ../../partials/header %>
+
+<div class="container">
+  <div class="greybox">
+    <h3>Edit comment from question "<span class="highlight"><%= question.title %></span>"</h3>
+    <form action="/p/<%= question._id %>/comment/<%= comment._id %>?_method=PUT" method="POST"> 
+      <div class="block">
+          <label for="text">Comment</label>
+          <input type="text" id="text" name="comment[text]" aria-describedby="text" value="<%= comment.text %>">
+      </div>
+      <button class="btnlink submitBtn">Submit</button>
+    </form>
+  </div>
+</div>
+
+<% include ../../partials/footer %>
