@@ -11,10 +11,10 @@ const flash = require("connect-flash"),
     methodOverride = require("method-override"),
     User = require("./models/user"),
     Project = require("./models/question"),
-    Updates = require("./models/updates");
-
-//MONGODB Connect + Environment Variable
-// ** CONFIGURE MONGODB VARIABLE TO YOUR CONFIGURATIONS
+    Updates = require("./models/updates"),
+    Seed = require("./seeds");
+    // Seed();
+//MONGODB Connect
 const MONGODB_URL = process.env.MONGODB_URL;
 mongoose.connect(
     MONGODB_URL,
@@ -25,7 +25,7 @@ mongoose.connect(
     },
     function (err) {
         if (err) {
-            console.log(err);
+            console.log(err); 
         }
     }
 );
