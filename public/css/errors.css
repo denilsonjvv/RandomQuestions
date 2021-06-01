@@ -6,7 +6,7 @@
 }
 .err_msg {
   background: #ffe9e2;
-  color: #e02c2c;
+  color: rgb(182, 48, 48);
 }
 .suc_msg {
   background: #b3f3b8;

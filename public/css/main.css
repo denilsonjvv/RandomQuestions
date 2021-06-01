@@ -78,7 +78,6 @@ h4,
 h5,
 h6 {
     margin: 10px 0;
-    font-weight: lighter;
 }
 h1 {
     font-size: 1.6em;
@@ -282,7 +281,7 @@ nav .navigation ul.nav-list li a {
     float: left;
     width: 30%;
     padding: 15px;
-    background-color: #f3f3f3;
+    background-color: white;
     box-sizing: border-box;
 }
 .userSection .proImgHolder {
@@ -300,7 +299,7 @@ nav .navigation ul.nav-list li a {
 .greybox {
     position: relative;
     padding: 15px;
-    background-color: #f3f3f3;
+    background-color: white;
     border-left: 1px solid #ddd;
     border-right: 1px solid #ddd;
 }
