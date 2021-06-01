@@ -63,7 +63,7 @@ app.use(async function (req, res, next) {
         try {
             const project = await Project.find({ author: req.user._id });
             const globalProjects = await Project.find({});
-            const globalUpdates = await Updates.find({})
+            const globalUpdates = await Updates.find({action: "created a question"})
                 .populate("question", "_id title")
                 .populate("author", "username profileImg");
             res.locals.currentUserProjects = project;
