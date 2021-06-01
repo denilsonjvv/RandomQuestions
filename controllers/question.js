@@ -3,7 +3,7 @@ let Updates = require("../models/updates");
 let Comment = require("../models/comment");
 module.exports = {
     async showQuestion(req, res, next)  {
-        let questions = await Question.findById(req.params.id)
+        let question = await Question.findById(req.params.id)
             .populate({
                 path: 'author'
             })
@@ -13,10 +13,14 @@ module.exports = {
                     path: 'author',
                     model: 'User'
                 }
+            })
+            .populate({
+                path: 'updates',
+                populate: 'question author'
             });
-            Promise.resolve(questions).catch(next);
-        if(questions){
-            await res.render("questions/show", { questions });
+            Promise.resolve(question).catch(next);
+        if(question){
+            await res.render("questions/show", { question });
         }else{
             await res.render("errors/project", { projectID: req.params.id }); // First Error Handling Page
         }
@@ -158,18 +162,20 @@ module.exports = {
         const { text } = req.body;
         let question = await Question.findById(req.params.id);
 
-        const commentBody = {
+        const updatesBody = {
             author: _id,
-            question: question.id,
-            text,
-        };
-        const updatesInfo = {
-            author: req.user._id,
             question: question.id,
             action: "commented on",
         };
+        let newUpdate = await Updates.create(updatesBody);
+        
+        const commentBody = {
+            author: _id,
+            question: question.id,
+            update: newUpdate.id,
+            text,
+        };
         let newComment = await Comment.create(commentBody);
-        let newUpdate = await Updates.create(updatesInfo);
 
         if(req.body){
             try{
