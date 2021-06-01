@@ -1,9 +1,9 @@
-var mongoose = require("mongoose");
-var Task = require("./task"),
-    Updates = require("./updates");
+const mongoose = require("mongoose");
+const Updates = require("./updates"),
+    Comments = require("./comment");
 
 //SCHEMA SETUP
-var questionSchema = new mongoose.Schema({
+const questionSchema = new mongoose.Schema({
     title: String,
     description: String,
     date: {
@@ -22,6 +22,12 @@ var questionSchema = new mongoose.Schema({
             ref: "Updates",
         },
     ],
+    comments: [
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref: "Comment"
+        }
+    ]
 });
 questionSchema.pre("remove", async function (next) {
     try {
@@ -30,6 +36,12 @@ questionSchema.pre("remove", async function (next) {
                 $in: this.updates,
             },
         });
+        await Comments.deleteMany({
+            _id: {
+                $in: this.comments,
+            },
+        });
+
         next();
     } catch (err) {
         next(err);
