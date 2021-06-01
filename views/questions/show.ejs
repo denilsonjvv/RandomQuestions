@@ -6,23 +6,48 @@
     <section class="mainSection">
         <section class="greybox">
             <div class="clearfix">
-                <h4 class="fl"><%= project.title %></h4>
-                <% if(currentUser && project.author.equals(currentUser._id)){ %>
+                <h4 class="fl"><%= questions.title %></h4>
+                <% if(currentUser && questions.author.equals(currentUser._id)){ %>
                     <div class="options fr">
                         <button class="btnlink">
-                            <a href="/p/<%= project._id %>/edit">Edit</a>
+                            <a href="/p/<%= questions._id %>/edit">Edit</a>
                         </button>
-                        <form class="deleteForm" action="/p/<%= project._id %>%>?_method=DELETE" method="POST">
+                        <form class="deleteForm" action="/p/<%= questions._id %>%>?_method=DELETE" method="POST">
                             <button type="submit" class="btnlink deleteBtn">Delete</button>
                         </form>
                     </div>
                 <% }; %>
             </div>
             <hr class="line"/>
-            <p><%= project.description %></p>
-            <div class="userImgHold simptip-position-bottom simptip-fade" data-tooltip="Author: <%= project.author.username %>">
-                <img src="/pro-img/<%= project.author.profileImg %>" class="user">
+            <p><%= questions.description %></p>
+            <div class="userImgHold simptip-position-bottom simptip-fade" data-tooltip="Author: <%= questions.author.username %>">
+                <img src="/pro-img/<%= questions.author.profileImg %>" class="user">
             </div>
+        </section>
+        <section class="greybox">
+            <h4>Comment Section</h4>
+            <hr class="line"/>
+
+            <% if(questions.comments.length === 0){ %>
+                <p style="text-align:center">You haven't asked a question yet, <a href="/p/<%=questions._id %>/comment/new" data-icon="&#xe044;">Add new comment</a></p>
+            <%}else{%>
+                <p style="text-align:right"><a href="/p/<%=questions._id %>/comment/new" data-icon="&#xe044;">Add new comment</a></p>
+                <% questions.comments.forEach((comment) =>{ %>
+                    <div class="userImgHold simptip-position-left simptip-fade" data-tooltip="Author: <%= comment.author.username %>">
+                        <img src="/pro-img/<%= comment.author.profileImg %>" class="user">
+                    </div>
+                    <strong><%= comment.author.username %> | </strong>
+                    <small><%= comment.text %></small>
+                    <% if(currentUser && comment.author._id.equals(currentUser._id)) {%> 
+                    <a href="/p/<%=questions._id%>/comment/<%=comment._id%>/edit" alt="">Edit</a>
+                    <form class="deleteForm" action="/p/<%= questions._id %>/comment/<%=comment._id%>?_method=DELETE" method="POST">
+                        <button type="submit" class="btnlink deleteBtn">Delete</button>
+                    </form>
+                    <% }; %>
+                    <hr class="line"/>
+                <% })%>
+            <% }; %>
+            
         </section>
     </section>
 </div>
