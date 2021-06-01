@@ -14,7 +14,7 @@ module.exports = {
         req.flash("success_msg", "You are logged out");
         res.redirect("/user/login");
     },
-    postRegister(req, res) {
+     async postRegister(req, res) {
         let { username, profileImg, password, password2 } = req.body;
         let errors = [];
 
@@ -33,35 +33,33 @@ module.exports = {
         if (errors.length > 0) {
             res.render("register", { errors, username, password, password2 });
         } else {
-            //validate passed
-            User.findOne({ username }, function (err, user) {
-                if (user) {
-                    //User exists
-                    errors.push({ msg: "Username is already registered" });
-                    res.render("register", {
-                        errors,
-                        username,
-                        password,
-                        password2,
-                    });
-                } else {
-                    var userInfo = {
-                        username,
-                        profileImg,
-                    };
-                    User.register(new User(userInfo), password, function (err) {
-                        if (err) {
-                            console.log(err);
-                        } else {
-                            req.flash(
-                                "success_msg",
-                                "You are now registered and can log in"
-                            );
-                            res.redirect("login");
-                        }
-                    });
-                }
-            });
+            let user = await User.findOne({username});
+            if (user) {
+                //User exists
+                errors.push({ msg: "Username is already registered" });
+                res.render("register", {
+                    errors,
+                    username,
+                    password,
+                    password2,
+                });
+            } else {
+                var userInfo = {
+                    username,
+                    profileImg,
+                };
+                User.register(new User(userInfo), password, (err) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        req.flash(
+                            "success_msg",
+                            "You are now registered and can log in"
+                        );
+                        res.redirect("login");
+                    }
+                });
+            }
         }
     },
 };
