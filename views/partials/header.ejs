@@ -22,15 +22,6 @@
   </head>
   <body>
     <nav>
-        <div id="logged"class="fl clearfix">
-          <% if(currentUser){ %>
-              <a href="/profile/<%= currentUser._id %>">
-                <span class="digit sfFont"><%= currentUser.username %> - <%= currentUser._id %></span>
-              </a>
-          <% }else{ %>
-                <span class="digit sfFont">No user logged in</span>
-          <% } %>
-        </div>
       <div class="navigation">
         <ul class="nav-list">
           <% if(currentUser){ %>
