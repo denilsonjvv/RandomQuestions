@@ -2,7 +2,7 @@
 
 <div class="container">
   <div class="greybox">
-    <h3>Edit Question "<span class="highlight"><%= project.title %></span>"</h3>
+    <h3 class="highlight"><%= project.title %></h3>
     <form action="/p/<%= project._id %>?_method=PUT" method="POST">
       <div class="block">
           <label for="title">Question</label>
