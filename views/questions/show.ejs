@@ -27,28 +27,28 @@
         <section class="greybox">
             <% question.updates.reverse().forEach((update) => {%>
 				<li>
-					<a href="/p/<%= update.question._id  %>">
-						<div class="userImgHold simptip-position-top simptip-fade" data-tooltip="Author: <%= update.author.username %>">
-							<img src="/pro-img/<%= update.author.profileImg %>" class="user">
-						</div>
-						<span class="highlight"><%= (update.author.username === currentUser.username) ? "You" : update.author.username %></span>
-						<%= update.action %>
-						<span class="highlight"><%=update.question.title%></span>
-						<span class="updateTime" style="display:none;"><%= update.lastUpdated %></span>
-                        <span><%= update.date.toDateString() %> </span> 
-						</a>
+                    <div class="userImgHold simptip-position-top simptip-fade" data-tooltip="Author: <%= update.author.username %>">
+                        <img src="/pro-img/<%= update.author.profileImg %>" class="user">
+                    </div>
+                    <span class="highlight"><%= (update.author.username === currentUser.username) ? "You" : update.author.username %></span>
+                    <%= update.action %>
+                    <span class="updateTime" style="display:none;"><%= update.lastUpdated %></span>
+                    <span><%= update.date.toDateString() %> </span> 
 				</li> 
 				<div class="timeline"></div>
 		<% }); %>
         </section>
         <section class="greybox">
-            <h4>Comment Section</h4>
-            <hr class="line"/>
-
+            <div class="clearfix">
+                <h4 class="fl">Comment Section</h4>
+                <% if(question.comments.length > 0){ %> 
+                    <p class="fr"><a href="/p/<%=question._id %>/comment/new" data-icon="&#xe044;">Add new comment</a></p>
+                <% }; %> 
+            </div>
+                <hr class="line"/>
             <% if(question.comments.length === 0){ %>
                 <p style="text-align:center">You haven't asked a question yet, <a href="/p/<%=question._id %>/comment/new" data-icon="&#xe044;">Add new comment</a></p>
             <%}else{%>
-                <p style="text-align:right"><a href="/p/<%=question._id %>/comment/new" data-icon="&#xe044;">Add new comment</a></p>
                 <% question.comments.reverse().forEach((comment) =>{ %>
                     <div class="userImgHold simptip-position-left simptip-fade" data-tooltip="Author: <%= comment.author.username %>">
                         <img src="/pro-img/<%= comment.author.profileImg %>" class="user">
