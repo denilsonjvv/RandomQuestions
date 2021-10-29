@@ -14,7 +14,6 @@ const flash = require("connect-flash"),
     Updates = require("./models/updates"),
     Seed = require("./seeds");
     // Seed();
-require("dotenv").config();
 //MONGODB Connect
 const MONGODB_URL = process.env.MONGODB_URL;
 mongoose.connect(
