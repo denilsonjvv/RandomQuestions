@@ -93,7 +93,7 @@ app.use("/p", questionRoutes);
 app.use("/profile", profileRoutes);
 
 //-----------------LISTENING TO APP SERVER
-const port = process.env.PORT || 4040;
+const port = process.env.PORT || 5000;
 app.listen(port, () => {
     console.log(`Server running with port ${port}`);
 });
