@@ -93,8 +93,8 @@ app.use("/p", questionRoutes);
 app.use("/profile", profileRoutes);
 
 //-----------------LISTENING TO APP SERVER
-const hostname = "127.0.0.1";
-const port = 4040;
+const hostname = process.env.HOST || "0.0.0.0";
+const port = process.env.PORT || 4040;
 app.listen(port, hostname, () => {
     console.log(`Server running: http://${hostname}:${port}/`);
 });
