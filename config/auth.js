@@ -40,7 +40,6 @@ middlewareObj.checkIfCommentOwner = (req, res, next)  => {
     if (req.isAuthenticated()) {
         //find the Question with ID
         Comment.findById(req.params.comment_id)
-            .populate("author", "_id")
             .exec((err, comment) => {
                 if(err){      
                     req.flash(
