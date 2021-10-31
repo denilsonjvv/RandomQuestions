@@ -22,15 +22,19 @@
   </head>
   <body>
     <nav>
-      <div class="navigation">
-        <ul class="nav-list">
-          <% if(currentUser){ %>
-            <li><a href="/">Home</a></li>
-            <li><a href="/profile/<%=currentUser._id%>">Profile</a></li>
-            <li><a href="/user/logout">Logout</a></li>
-          <% }else{ %>
-            <li><a href="/user/login">Login</a></li>
-          <% } %>
-        </ul>
+      <div class="container">
+        <a href="/" style="padding: 10px;">RandomQuestions</a>
+        <div class="navigation">
+          <ul class="nav-list">
+            <% if(currentUser){ %>
+              <li><a href="/">Home</a></li>
+              <li><a href="/profile/<%=currentUser._id%>">Profile</a></li>
+              <li><a href="/user/logout">Logout</a></li>
+            <% }else{ %>
+              <li><a href="/user/login">Login</a></li>
+              <li><a href="/user/register">Register</a></li>
+            <% } %>
+          </ul>
+        </div>
       </div>
     </nav>
