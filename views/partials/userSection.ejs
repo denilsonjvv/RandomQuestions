@@ -1,12 +1,5 @@
 <section class="userSection">
-    <div class="proImgHolder">
-    	<img src="/pro-img/<%= currentUser.profileImg %>" class="user">
-	</div>
-	<div class="proNameHolder">
-		<a href="/profile/<%= currentUser.id %>" class="mauto"><%= currentUser.username %></a>
-	</div>
-	<hr class="line"/>
-	<h5>Recent Updates</h5>
+    <h5>Recent Updates</h5>
 		<ul id="updateUl">
 		<% globalUpdates.reverse().forEach((update) => {%>
 				<li>
@@ -14,7 +7,7 @@
 						<div class="userImgHold simptip-position-top simptip-fade" data-tooltip="Author: <%= update.author.username %>">
 							<img src="/pro-img/<%= update.author.profileImg %>" class="user">
 						</div>
-						<span class="highlight"><%= (update.author.username === currentUser.username) ? "You" : update.author.username %></span>
+						<span class="highlight"><%= (currentUser && update.author.username === currentUser.username) ? "You" : update.author.username %></span>
 						<%= update.action %>
 						<span class="highlight"><%=update.question.title%></span>
 						<span class="updateTime" style="display:none;"><%= update.lastUpdated %></span>

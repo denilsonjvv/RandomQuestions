@@ -59,19 +59,19 @@ passport.deserializeUser(User.deserializeUser());
 //Global vars
 app.use(async function (req, res, next) {
     //check req.user is valid- checks if user is logged in
-    if (req.user) {
-        try {
+    try {
+        if (req.user) {
             const project = await Project.find({ author: req.user._id });
-            const globalProjects = await Project.find({});
-            const globalUpdates = await Updates.find({action: "created a question"})
-                .populate("question", "_id title")
-                .populate("author", "username profileImg");
             res.locals.currentUserProjects = project;
-            res.locals.allProjects = globalProjects;
-            res.locals.globalUpdates = globalUpdates;
-        } catch (err) {
-            console.log(err.message);
         }
+        const globalProjects = await Project.find({});
+        const globalUpdates = await Updates.find({ action: "created a question" })
+            .populate("question", "_id title")
+            .populate("author", "username profileImg");
+        res.locals.allProjects = globalProjects;
+        res.locals.globalUpdates = globalUpdates;
+    } catch (err) {
+        console.log(err.message);
     }
     res.locals.currentUser = req.user;
     res.locals.success_msg = req.flash("success_msg");

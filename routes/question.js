@@ -15,28 +15,28 @@ const {
     deleteQuestionComment
 } = require("../controllers/question");
 
-//Show Post Form
+//SHOW project page
+router.get("/:id", showQuestion);
+//NEW Post page
 router.get("/new", auth.userIsLogged, (req, res) => {
     res.render("questions/new", { user: req.user });
 });
-//SHOW project page
-router.get("/:id", auth.userIsLogged, showQuestion);
-//CREATE new question
+//CREATE question
 router.post("/", auth.userIsLogged, createQuestion);
-//Edit question page
+//EDIT question page
 router.get("/:id/edit", auth.userIsLogged, auth.checkIfOwner, showEditQuestion);
-//UPDATE question page
+//UPDATE question
 router.put("/:id", auth.userIsLogged, auth.checkIfOwner, updateQuestion);
-//DESTROY question page
+//DESTROY question
 router.delete("/:id", auth.userIsLogged, auth.checkIfOwner, deleteQuestion);
 
 //QUESTION COMMENTS ROUTES
-//SHOW new comment page
+//NEW comment page
 router.get("/:id/comment/new", auth.userIsLogged, showCommentForm);
-//CREATE comment page
+//CREATE comment
 router.post("/:id/comment", auth.userIsLogged, postNewComment);
 //EDIT comment page
-router.get("/:id/comment/:comment_id/edit",auth.userIsLogged, editComment)
+router.get("/:id/comment/:comment_id/edit",auth.userIsLogged, auth.checkIfCommentOwner, editComment)
 //UPDATE comment
 router.put("/:id/comment/:comment_id", auth.userIsLogged, updateComment)
 router.delete("/:id/comment/:comment_id", auth.userIsLogged, auth.checkIfCommentOwner, deleteQuestionComment);

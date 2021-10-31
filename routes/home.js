@@ -5,7 +5,7 @@ var Question = require("../models/question"),
     auth = require("../config/auth"); // connect to auth file to authorize.
 
 // Landing page
-router.get("/", auth.userIsLogged, async (req, res) => {
+router.get("/", async (req, res) => {
     try {
         Question.find()
             .populate("author", "username profileImg")

@@ -30,7 +30,7 @@
                     <div class="userImgHold simptip-position-top simptip-fade" data-tooltip="Author: <%= update.author.username %>">
                         <img src="/pro-img/<%= update.author.profileImg %>" class="user">
                     </div>
-                    <span class="highlight"><%= (update.author.username === currentUser.username) ? "You" : update.author.username %></span>
+                    <span class="highlight"><%= (currentUser && update.author.username === currentUser.username) ? "You" : update.author.username %></span>
                     <%= update.action %>
                     <span class="updateTime" style="display:none;"><%= update.lastUpdated %></span>
                     <span><%= update.date.toDateString() %> </span> 
