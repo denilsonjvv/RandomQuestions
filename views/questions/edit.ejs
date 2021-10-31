@@ -2,15 +2,29 @@
 
 <div class="container">
   <div class="greybox">
-    <h3 class="highlight"><%= project.title %></h3>
-    <form action="/p/<%= project._id %>?_method=PUT" method="POST">
+    <h3 class="highlight"><%= question.title %></h3>
+    <form action="/p/<%= question._id %>?_method=PUT" method="POST">
       <div class="block">
-          <label for="title">Question</label>
-          <input type="text" id="title" name="project[title]" aria-describedby="title" value="<%= project.title %>" placeholder="<%= project.title %>">
+        <label for="title">Question</label>
+        <input
+          type="text"
+          id="title"
+          name="question[title]"
+          aria-describedby="title"
+          value="<%= question.title %>"
+          placeholder="<%= question.title %>"
+        />
       </div>
       <div class="block">
         <label for="description">Description:</label>
-        <textarea type="text" id="description" name="project[description]" placeholder="Describe your question."><%= project.description %></textarea>
+        <textarea
+          type="text"
+          id="description"
+          name="question[description]"
+          placeholder="Describe your question."
+        >
+          <%= question.description %>
+        </textarea>
       </div>
       <button class="btnlink submitBtn">Submit</button>
     </form>

@@ -77,22 +77,22 @@ module.exports = {
         } //End if statement
     },
     showEditQuestion(req, res, next) {
-        Question.findById(req.params.id, function (err, project) {
+        Question.findById(req.params.id, function (err, question) {
             if (err) {
                 req.flash(
                     "info_msg",
-                    "There was a problem accessing your project, try again."
+                    "There was a problem accessing your question, try again."
                 );
                 res.redirect("/");
             } else {
-                res.render("questions/edit", { project });
+                res.render("questions/edit", { question });
             }
         });
     },
     async updateQuestion(req, res) {
         let question = await Question.findByIdAndUpdate(req.params.id,
-            req.body.project);
-        if (req.body.project) {
+            req.body.question);
+        if (req.body.question) {
             try{
                 await question.save();
                 req.flash(
@@ -109,39 +109,6 @@ module.exports = {
                res.render("questions/show")
             }
         }
-        // Question.findByIdAndUpdate(
-        //     req.params.id,
-        //     req.body.project,
-        //     (err, question) => {
-        //         if (err) {
-        //             console.log("error finding question and updating", err);
-        //         } else {
-        //             const updatesInfo = {
-        //                 author: req.user._id,
-        //                 question: question._id,
-        //                 action: "updated a question",
-        //             };
-        //             Updates.create(updatesInfo, function (err, newlyUpdated) {
-        //                 if (err) {
-        //                     console.log(
-        //                         "error at create update while saving edit",
-        //                         err
-        //                     );
-        //                 } else {
-        //                     newlyUpdated.save();
-        //                     question.updates.push(newlyUpdated);
-        //                     question.save();
-        //                     //successfully added data to update
-        //                     req.flash(
-        //                         "success_msg",
-        //                         "Your question has been updated."
-        //                     );
-        //                     res.redirect("/p/" + question._id + "/"); //redirect back to show page
-        //                 }
-        //             });
-        //         }
-        //     }
-        // );
     },
     deleteQuestion(req, res, next) {
         Question.findById(req.params.id, function (err, project) {
