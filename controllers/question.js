@@ -121,7 +121,7 @@ module.exports = {
     showCommentForm(req,res,next){
         Question.findById(req.params.id, (err, question)=> {
             if(err) return next(err);
-            res.render("questions/newComment", {question});
+            res.render("questions/comments/new", { question });
         })
     },
     async postNewComment(req,res){
