@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router({ mergeParams: true });
-let auth = require("../config/auth"); // connect to auth file to authorize.
-//import methods from controller
+let auth = require("../config/auth");
 const {
     showQuestion,
     createQuestion,
@@ -15,12 +14,12 @@ const {
     deleteQuestionComment
 } = require("../controllers/question");
 
-//SHOW project page
-router.get("/:id", showQuestion);
 //NEW Post page
 router.get("/new", auth.userIsLogged, (req, res) => {
     res.render("questions/new", { user: req.user });
 });
+//SHOW project page
+router.get("/:id", showQuestion);
 //CREATE question
 router.post("/", auth.userIsLogged, createQuestion);
 //EDIT question page
