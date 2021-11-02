@@ -12,6 +12,7 @@ const flash = require("connect-flash"),
     User = require("./models/user"),
     Project = require("./models/question"),
     Updates = require("./models/updates"),
+    Topic = require("./models/topic"),
     Seed = require("./seeds");
     // Seed();
 //MONGODB Connect
@@ -84,12 +85,14 @@ app.use(async function (req, res, next) {
 const indexRoutes = require("./routes/index"),
     homeRoutes = require("./routes/home"),
     profileRoutes = require("./routes/profile"),
-    questionRoutes = require("./routes/question");
+    questionRoutes = require("./routes/question"),
+    topicRoutes = require("./routes/topic");
 //Locate Routes
 app.use("/user", indexRoutes); //login and register
 app.use(homeRoutes); //  "/"
 app.use("/p", questionRoutes);
 app.use("/profile", profileRoutes);
+app.use("/topic", topicRoutes);
 
 //-----------------LISTENING TO APP SERVER
 const port = process.env.PORT || 5000;

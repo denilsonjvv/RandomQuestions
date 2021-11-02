@@ -1,0 +1,7 @@
+<% include ../partials/header %>
+<% include ../partials/messages %> 
+    <h2>Topics:</h2>
+    <% topics.forEach((topic) => { %> 
+        <li><%= topic.title %> </li>
+    <% }) %> 
+<% include ../partials/footer %>
