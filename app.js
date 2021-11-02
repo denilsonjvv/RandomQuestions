@@ -87,14 +87,13 @@ const indexRoutes = require("./routes/index"),
     profileRoutes = require("./routes/profile"),
     questionRoutes = require("./routes/question"),
     topicRoutes = require("./routes/topic");
-//Locate Routes
-app.use("/user", indexRoutes); //login and register
-app.use(homeRoutes); //  "/"
+app.use("/user", indexRoutes);
+app.use(homeRoutes);
 app.use("/p", questionRoutes);
 app.use("/profile", profileRoutes);
 app.use("/topic", topicRoutes);
 
-//-----------------LISTENING TO APP SERVER
+// Run app server
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
     console.log(`Server running with port ${port}`);
