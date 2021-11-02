@@ -2,8 +2,9 @@ let Question = require("../models/question");
 let Updates = require("../models/updates");
 let Comment = require("../models/comment");
 module.exports = {
-    async showQuestion(req, res, next)  {
-        let question = await Question.findById(req.params.id)
+    async showQuestion(req, res) {
+        try {
+            const question = await Question.findById(req.params.id)
             .populate({
                 path: 'author'
             })
@@ -17,77 +18,63 @@ module.exports = {
             .populate({
                 path: 'updates',
                 populate: 'question author'
+            })
+                .populate({
+                    path: 'topics',
+                    populate: 'title'
             });
-            Promise.resolve(question).catch(next);
-        if(question){
-            await res.render("questions/show", { question });
-        }else{
-            await res.render("errors/project", { projectID: req.params.id }); // First Error Handling Page
+            res.render("questions/show", { question });
+        } catch (error) {
+            res.render("errors/project", { projectID: req.params.id });
         }
     },
-    createQuestion(req, res) {
-        //req.body information from form
-        let { title, description } = req.body;
-        //req.user information from logged in user
-        let { _id } = req.user;
+    async createQuestion(req, res) {
+        const { title, description } = req.body;
+        const { _id } = req.user;
         const infoFields = {
             title,
             description,
             author: _id,
         };
-        //Error handling
         let errors = [];
-        //check required fields
         if (!title.trim() || !description.trim()) {
-            errors.push({ msg: "Fill in all fields please" });
+            errors.push({ msg: "Fill in all empty fields please" });
         }
         if (errors.length > 0) {
             res.render("questions/new", { errors, title, description });
         } else {
-            //Create a new and save to database
-            Question.create(infoFields, function (err, newQuestion) {
-                if (err) {
-                    console.log(err);
-                } else {
-                    let updatesInfo = {
-                        author: _id,
-                        question: newQuestion._id,
-                        action: "created a question",
-                    };
-                    Updates.create(updatesInfo, function (err, newlyUpdated) {
-                        if (err) {
-                            console.log(
-                                "Could not create update schema." + err
-                            );
-                        } else {
-                            newlyUpdated.save();
-                            newQuestion.updates.push(newlyUpdated);
-                            newQuestion.save();
-                            //successfully added data to update
-                            // NOTE: This will need to be refactored/modified for better error handling
-                            req.flash(
-                                "success_msg",
-                                "Your new project has been created, check it out below!"
-                            );
-                            res.redirect("/p/" + newQuestion._id + "/"); //redirect back to show page
-                        }
-                    });
-                }
-            });
-        } //End if statement
-    },
-    showEditQuestion(req, res, next) {
-        Question.findById(req.params.id, function (err, question) {
-            if (err) {
+            try {
+                const newQuestion = await Question.create(infoFields);
+                const updatesInfo = {
+                    author: _id,
+                    question: newQuestion._id,
+                    action: "created a question",
+                };
+                const newUpdate = await Updates.create(updatesInfo);
+                newUpdate.save();
+                newQuestion.updates.push(newUpdate);
+                newQuestion.save();
                 req.flash(
-                    "info_msg",
-                    "There was a problem accessing your question, try again."
+                    "success_msg",
+                    "Your new question has been created, check it out below!"
                 );
-                res.redirect("/");
-            } else {
-                res.render("questions/edit", { question });
+                res.redirect("/p/" + newQuestion._id + "/"); //redirect back to show page
+            } catch (error) {
+                res.status(500).send(error);
             }
-        });
+        }
+    },
+    async showEditQuestion(req, res) {
+        try {
+            const question = await Question.findById(req.params.id);
+            res.render("questions/edit", { question });
+        } catch (error) {
+            req.flash(
+                "info_msg",
+                "There was a problem accessing your question, try again."
+            );
+            res.redirect("/");
+        }
     },
     async updateQuestion(req, res) {
         let question = await Question.findByIdAndUpdate(req.params.id,
