@@ -27,6 +27,12 @@ const questionSchema = new mongoose.Schema({
             type:mongoose.Schema.Types.ObjectId,
             ref: "Comment"
         }
+    ],
+    topics: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Topic"
+        }
     ]
 });
 questionSchema.pre("remove", async function (next) {
