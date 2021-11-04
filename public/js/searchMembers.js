@@ -1,29 +1,17 @@
 //Search members to project function
 let memberIds = [];
 let list;
-let submitBtn = document.getElementsByClassName("submit");
 function addMember() {
-  let memForm = document.getElementById("newMembers");
+  let addTopic = document.getElementById("addTopic");
   for (var i = 0; i < list.length; i++) {
     list[i].addEventListener("click", function() {
       let memId = this.getAttribute("data-memId"); // member Id from data Attribute
-      let memProImg = this.getAttribute("data-img");
+      // let memProImg = this.getAttribute("data-img");
       let newName = this.textContent; //innerHtml (name)
-      let inputStr =
-        "<label class='checkbox-label'><input type='checkbox' name='members' value='" +
-        memId +
-        "' checked></input><span class='checkbox-custom'></span><img src='/pro-img/" +
-        memProImg +
-        "'>" +
-        newName +
-        "</label>";
+      let inputString = `<label class='checkbox-label'><input type='checkbox' name='topics' value='${memId}' checked></input><span class='checkbox-custom'></span>${newName}</label> `;
+
       memberIds.push(memId);
-      if (submitBtn.length === 0) {
-        let theButtonStr =
-          "<button class='submit btnlink' type='submit'>Add Members Selected </button>";
-        memForm.insertAdjacentHTML("beforeend", theButtonStr);
-      }
-      memForm.insertAdjacentHTML("beforeend", inputStr);
+      addTopic.innerHTML += inputString;
     });
   } // end of for loop
 }
@@ -31,7 +19,7 @@ function addMember() {
 //--------------
 var showResults = debounce(function(arg) {
   var value = arg.trim();
-  var membersList = $("#membersList");
+  var topicsList = $("#topicsList");
   var popup = $("#memberPopup");
   var input = $("#assign");
   input.addClass("loading");
@@ -43,27 +31,18 @@ var showResults = debounce(function(arg) {
     popup.fadeIn();
   }
   var jqxhr = $.get("/p/search?q=" + value, function(data) {
-    membersList.html("");
+    topicsList.html("");
   })
     .done(function(data) {
       if (data.length === 0) {
-        membersList.append(
-          "<span>No members found with ' " + value + " ' </span>"
+        topicsList.append(
+          "<span>No topics found with ' " + value + " ' </span>"
         );
       } else {
         data.forEach(x => {
           console.log(x);
-          var outputHTML =
-            "<li class='lis' data-img='" +
-            x.profileImg +
-            "' data-memId='" +
-            x._id +
-            "'><img src='/pro-img/" +
-            x.profileImg +
-            "'>" +
-            x.name +
-            "</li>";
-          membersList.append(outputHTML);
+          let outputHTML = `<li class='lis' data-memId='${x._id}'>${x.title}</li>`;
+          topicsList.append(outputHTML);
         });
         list = document.querySelectorAll(".lis");
         addMember();
