@@ -94,7 +94,7 @@ app.use("/profile", profileRoutes);
 app.use("/topic", topicRoutes);
 
 // Run app server
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log(`Server running with port ${port}`);
 });
