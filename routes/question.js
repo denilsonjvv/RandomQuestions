@@ -42,10 +42,10 @@ router.get("/search", function (req, res, next) {
 router.get("/new", (req, res) => {
     res.render("questions/new", { user: req.user });
 });
-//SHOW project page
-router.get("/:id", showQuestion);
 //CREATE question
 router.post("/", auth.userIsLogged, createQuestion);
+//SHOW project page
+router.get("/:id", showQuestion);
 //EDIT question page
 router.get("/:id/edit", auth.userIsLogged, auth.checkIfOwner, showEditQuestion);
 //UPDATE question
