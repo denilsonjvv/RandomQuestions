@@ -17,8 +17,8 @@
         <textarea type="text" id="description" name="description" rows="4" placeholder="Explain..."><%= typeof description != 'undefined' ? description : '' %></textarea>
       </div>
       <label for="">Add Topics</label>
-      <input type="text" id="assign" onkeyup="showResults(this.value)" placeholder="Search topics" autofocus>
-			<div id="memberPopup">
+      <input type="text" id="searchTopic" onkeyup="searchTopics(this.value)" placeholder="Search topics" autofocus>
+			<div id="topicsPopup">
 				<ul id="topicsList">
 				</ul>
 			</div>
@@ -28,5 +28,5 @@
   </div>
 </div>
 
-<script src="/js/searchMembers.js"></script>
+<script src="/js/searchTopics.js"></script>
 <% include ../partials/footer %>
