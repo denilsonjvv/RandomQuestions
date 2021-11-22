@@ -17,7 +17,6 @@ const {
 
 router.get("/search", async function (req, res, next) {
     var q = req.query.q;
-    console.log(q);
     try {
         const search_result = await Topic.find(
             {
