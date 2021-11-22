@@ -1,6 +1,7 @@
 let Question = require("../models/question");
 let Updates = require("../models/updates");
 let Comment = require("../models/comment");
+let Topic = require("../models/topic");
 module.exports = {
     async showQuestion(req, res) {
         try {
@@ -20,8 +21,7 @@ module.exports = {
                 populate: 'question author'
             })
                 .populate({
-                    path: 'topics',
-                    populate: 'title'
+                    path: 'topics'
             });
             res.render("questions/show", { question });
         } catch (error) {
@@ -29,41 +29,44 @@ module.exports = {
         }
     },
     async createQuestion(req, res) {
-        const { title, description, members } = req.body;
-        res.status(201).send(req.body);
-        // const { _id } = req.user;
-        // const infoFields = {
-        //     title,
-        //     description,
-        //     author: _id,
-        // };
-        // let errors = [];
-        // if (!title.trim() || !description.trim()) {
-        //     errors.push({ msg: "Fill in all empty fields please" });
-        // }
-        // if (errors.length > 0) {
-        //     res.render("questions/new", { errors, title, description });
-        // } else {
-        //     try {
-        //         const newQuestion = await Question.create(infoFields);
-        //         const updatesInfo = {
-        //             author: _id,
-        //             question: newQuestion._id,
-        //             action: "created a question",
-        //         };
-        //         const newUpdate = await Updates.create(updatesInfo);
-        //         newUpdate.save();
-        //         newQuestion.updates.push(newUpdate);
-        //         newQuestion.save();
-        //         req.flash(
-        //             "success_msg",
-        //             "Your new question has been created, check it out below!"
-        //         );
-        //         res.redirect("/p/" + newQuestion._id + "/"); //redirect back to show page
-        //     } catch (error) {
-        //         res.status(500).send(error);
-        //     }
-        // }
+        const { title, description, topics } = req.body;
+        const { _id } = req.user;
+        const infoFields = {
+            title,
+            description,
+            author: _id,
+        };
+        let errors = [];
+        if (!title.trim() || !description.trim()) {
+            errors.push({ msg: "Fill in all empty fields please" });
+        }
+        if (errors.length > 0) {
+            res.render("questions/new", { errors, title, description });
+        } else {
+            try {
+                const newQuestion = await Question.create(infoFields);
+                const updatesInfo = {
+                    author: _id,
+                    question: newQuestion._id,
+                    action: "created a question",
+                };
+                const newUpdate = await Updates.create(updatesInfo);
+                const newTopics = await Topic.find({ 'title': { $in: topics } });
+                newTopics.forEach((topic) => {
+                    newQuestion.topics.push(topic);
+                })
+                newUpdate.save();
+                newQuestion.updates.push(newUpdate);
+                newQuestion.save();
+                req.flash(
+                    "success_msg",
+                    "Your new question has been created, check it out below!"
+                );
+                res.redirect("/p/" + newQuestion._id + "/");
+            } catch (error) {
+                res.status(500).send(error);
+            }
+        }
     },
     async showEditQuestion(req, res) {
         try {
@@ -78,24 +81,21 @@ module.exports = {
         }
     },
     async updateQuestion(req, res) {
-        let question = await Question.findByIdAndUpdate(req.params.id,
-            req.body.question);
-        if (req.body.question) {
-            try{
-                await question.save();
-                req.flash(
-                    "success_msg",
-                    "Your question has been updated."
-                );
-                res.redirect("/p/" + question._id + "/"); //redirect back to show page
-            
-            }catch(err) {
-                req.flash(
-                    "success_msg",
-                    "Your question has been updated."
-                );
-               res.render("questions/show")
-            }
+        try {
+            const question = await Question.findByIdAndUpdate(req.params.id, req.body.question);
+            await question.save();
+            req.flash(
+                "success_msg",
+                "Your question has been updated."
+            );
+            res.redirect("/p/" + question._id + "/"); //redirect back to show page
+
+        } catch (err) {
+            req.flash(
+                "success_msg",
+                "Your question has been updated."
+            );
+            res.render("questions/show")
         }
     },
     deleteQuestion(req, res, next) {
