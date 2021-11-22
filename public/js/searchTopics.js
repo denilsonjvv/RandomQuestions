@@ -21,7 +21,6 @@ function renderResults(search_value, topicsData) {
     topicsList.append(topicElement);
   });
   addMember();
-  console.log(resultList);
 }
 let searchTopics = debounce((arg) => {
   resultList = [];
