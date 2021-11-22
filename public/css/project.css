@@ -7,7 +7,7 @@
   background-repeat: no-repeat;
   background-origin: content-box;
 }
-#assign:focus {
+#searchTopic:focus {
   box-shadow: none;
 }
 #questionForm img {
@@ -80,7 +80,7 @@
   height: 0px;
   width: 0px;
   border-radius: 5px;
-  border: solid white;
+  border: solid var(--black);
   border-width: 0 3px 3px 0;
   -webkit-transform: rotate(0deg) scale(0);
   -ms-transform: rotate(0deg) scale(0);
@@ -96,13 +96,13 @@
   left: 14px;
   width: 6px;
   height: 15px;
-  border: solid white;
+  border: solid var(--black);
   border-width: 0 3px 3px 0;
   background-color: transparent;
   border-radius: 0;
 }
 
-#memberPopup {
+#topicsPopup {
   overflow: hidden;
   background-color: white;
   border-radius: 0 0 3px 3px;
