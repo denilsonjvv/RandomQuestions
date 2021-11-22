@@ -25,6 +25,11 @@
             </div>
         </section>
         <section class="greybox">
+            <% question.topics.reverse().forEach((topic) => {%>
+                <b><%= topic.title + ", "%></b>
+            <% }); %>
+        </section>
+        <section class="greybox">
             <% question.updates.reverse().forEach((update) => {%>
 				<li>
                     <div class="userImgHold simptip-position-top simptip-fade" data-tooltip="Author: <%= update.author.username %>">
@@ -36,7 +41,7 @@
                     <span><%= update.date.toDateString() %> </span> 
 				</li> 
 				<div class="timeline"></div>
-		<% }); %>
+            <% }); %>
         </section>
         <section class="greybox">
             <div class="clearfix">
