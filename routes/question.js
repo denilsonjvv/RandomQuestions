@@ -15,28 +15,24 @@ const {
     deleteQuestionComment
 } = require("../controllers/question");
 
-router.get("/search", function (req, res, next) {
+router.get("/search", async function (req, res, next) {
     var q = req.query.q;
-    Topic.find(
-        {
-            title: {
-                $regex: new RegExp(q),
-                $options: "$i"
-            }
-        },
-        {
-            __v: 0
-        },
-        function (err, data) {
-            if (err) {
-                console.log(err);
-            } else {
-                res.json(data);
-            }
-        }
-    )
-        .sort({ username: 1 })
-        .limit(10);
+    console.log(q);
+    try {
+        const search_result = await Topic.find(
+            {
+                title: {
+                    $regex: new RegExp(q),
+                    $options: "i"
+                }
+            },
+            {
+                __v: 0
+            });
+        res.json(search_result);
+    } catch(err) {
+        console.log(err);
+    }
 });
 //NEW Post page
 router.get("/new", (req, res) => {
