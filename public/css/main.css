@@ -44,6 +44,9 @@
     color: var(--blue);
     font-weight: bold;
 }
+.d-block {
+    display: block !important;
+}
 /* Font for digits text */
 .digit {
     font-family: "SF Mono Regular";
@@ -166,7 +169,7 @@ textarea:focus {
     box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.09);
 }
 .btnlink {
-    display: block;
+    display: inline-block;
     color: white;
     background: var(--blue);
     border: 2px solid #0053a9;
@@ -277,7 +280,7 @@ nav .navigation ul.nav-list li a {
 /* Main CSS */
 .container {
     position: relative;
-    max-width: 1000px;
+    max-width: 750px;
     width: 100%;
     margin: 0 auto;
 }
