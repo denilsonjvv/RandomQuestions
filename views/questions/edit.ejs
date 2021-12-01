@@ -1,6 +1,7 @@
 <% include ../partials/header %>
 
 <div class="container">
+  <% include ../partials/messages %> 
   <div class="greybox">
     <h3 class="highlight"><%= question.title %></h3>
     <form action="/p/<%= question._id %>?_method=PUT" method="POST">
@@ -24,9 +25,26 @@
           placeholder="Describe your question."
         ><%= question.description %></textarea>
       </div>
-      <button class="btnlink submitBtn">Submit</button>
+
+      <label for="searchTopic">Update Topics:</label>
+      <div id="searchTopicsContainer">
+        <input type="text" id="searchTopic" onkeyup="searchTopics(this.value)" placeholder="Search topics" autocomplete="off">
+        <div id="topicsPopup">
+          <ul id="topicsList"></ul>
+        </div>
+      </div>
+      <div id="topicContainer">
+        <% question.topics.forEach((topic) => { %>
+          <label class="chosenTopic checkbox-label">
+            <input type="checkbox" name="topics" value="<%= topic.title %>" checked="">
+            <%= topic.title %> <span onclick="this.parentElement.remove();"><i class="fas fa-times"></i></span>
+          </label>
+        <% }) %> 
+      </div>
+      <button class="btnlink submitBtn d-block">Update</button>
     </form>
   </div>
 </div>
 
+<script src="/js/searchTopics.js"></script>
 <% include ../partials/footer %>
