@@ -6,6 +6,7 @@ middlewareObj.userIsLogged = (req, res, next) => {
     if (req.isAuthenticated()) {
         return next();
     } else {
+        req.session.returnToURL = req.originalUrl;
         req.flash("info_msg", "Please log in to view this resource");
         res.redirect("/user/login");
     }
