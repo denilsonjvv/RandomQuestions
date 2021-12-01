@@ -17,11 +17,12 @@
         <textarea type="text" id="description" name="description" rows="4" placeholder="Explain..."><%= typeof description != 'undefined' ? description : '' %></textarea>
       </div>
       <label for="">Add Topics</label>
-      <input type="text" id="searchTopic" onkeyup="searchTopics(this.value)" placeholder="Search topics" autofocus>
-			<div id="topicsPopup">
-				<ul id="topicsList">
-				</ul>
-			</div>
+      <div id="searchTopicsContainer">
+        <input type="text" id="searchTopic" onkeyup="searchTopics(this.value)" placeholder="Search topics" autocomplete="off">
+        <div id="topicsPopup">
+          <ul id="topicsList"></ul>
+        </div>
+      </div>
       <div id="topicContainer"></div>
       <button class="btnlink submitBtn">Submit</button>
     </form>
