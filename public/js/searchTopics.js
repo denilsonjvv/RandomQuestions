@@ -1,10 +1,9 @@
 //Search members to project function
-let resultList = [];
-
-function addTopic() {
-  let topicContainer = document.getElementById("topicContainer");
-  resultList.forEach((item) => {
+function addTopic(topicResults) {
+  if (topicResults.length === 0) return;
+  topicResults.forEach((item) => {
     item.addEventListener("click", () => {
+      const topicContainer = document.getElementById("topicContainer");
       const topicText = item.textContent;
       const newInput = `<label class='chosenTopic checkbox-label'><input type='checkbox' name='topics' value='${topicText}' checked>${topicText} <span onClick="this.parentElement.remove();"><i class="fas fa-times"></i></span></label>`;
       topicContainer.innerHTML += newInput;
@@ -14,30 +13,24 @@ function addTopic() {
 }
 function renderResults(search_value, topicsData) {
   const topicsList = $("#topicsList");
-  // const chosenTopics = document.querySelectorAll(".chosenTopic");
+  const chosenTopics = document.querySelectorAll(".chosenTopic");
   topicsList.html("");
   if (topicsData.length == 0) return topicsList.append(`<span>No topics found with ${search_value}</span>`);
-  topicsData.forEach(topic => {
+// TODO: Refactor this.
+  const testArray = [];
+  chosenTopics.forEach((topic) => testArray.push(topic.textContent.trim()));
+  const testArray2 = [];
+  topicsData.forEach((topic) => testArray2.push(topic.title.trim()));
+  const topicResults = testArray2.filter((element) => !testArray.includes(element));
+  if (topicResults.length === 0) return topicsList.append(`<span>Topic results are already chosen.</span>`);
+  const resultList = [];
+  topicResults.forEach((topic) => {
     const topicElement = document.createElement("li");
-    topicElement.innerHTML = topic.title;
-
-    // TODO: Need to check if chosen topics match the topic title 
-      // - If so, it shouldn't be created, 
-      // - else create element and append to list
-
-    // chosenTopics.forEach((chosenTopic) => {
-    //   if (topic.title.trim() == chosenTopic.textContent.trim()) {
-    //     console.log(`${topic.title} is chosen.`)
-    //     return
-    //   } 
-    //   resultList.push(topicElement);
-    //   topicsList.append(topicElement);
-    // })
+    topicElement.innerHTML = topic;
     resultList.push(topicElement);
     topicsList.append(topicElement);
-    
-  });
-  addTopic();
+  })
+  addTopic(resultList);
 }
 
 const searchTopics = debounce((arg) => {
