@@ -70,7 +70,10 @@ module.exports = {
     },
     async showEditQuestion(req, res) {
         try {
-            const question = await Question.findById(req.params.id);
+            const question = await Question.findById(req.params.id)
+                .populate({
+                    path: 'topics'
+                });
             res.render("questions/edit", { question });
         } catch (error) {
             req.flash(
@@ -82,7 +85,16 @@ module.exports = {
     },
     async updateQuestion(req, res) {
         try {
-            const question = await Question.findByIdAndUpdate(req.params.id, req.body.question);
+            const {topics} = req.body;
+            const {title, description} = req.body.question;
+            const findTopics = await Topic.find({"title": { $in: topics }});
+            const question = await Question.findOneAndUpdate(req.params.id, 
+                { "$set": { 
+                    "title": title,
+                    "description": description,
+                    "topics": findTopics } 
+                }
+            );
             await question.save();
             req.flash(
                 "success_msg",
@@ -91,11 +103,8 @@ module.exports = {
             res.redirect("/p/" + question._id + "/"); //redirect back to show page
 
         } catch (err) {
-            req.flash(
-                "success_msg",
-                "Your question has been updated."
-            );
-            res.render("questions/show")
+            console.log(err);
+            res.redirect("back");
         }
     },
     deleteQuestion(req, res, next) {
