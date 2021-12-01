@@ -34,7 +34,7 @@ router.get("/search", async function (req, res, next) {
     }
 });
 //NEW Post page
-router.get("/new", (req, res) => {
+router.get("/new", auth.userIsLogged, (req, res) => {
     res.render("questions/new", { user: req.user });
 });
 //CREATE question
