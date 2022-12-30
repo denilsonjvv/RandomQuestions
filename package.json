@@ -38,7 +38,7 @@
         "passport-local": "^1.0.0",
         "passport-local-mongoose": "^5.0.1",
         "quill-delta": "^4.2.2",
-        "random-words": "^1.1.1"
+        "random-words": "^1.2.0"
     },
     "devDependencies": {
         "dotenv": "^8.6.0"
