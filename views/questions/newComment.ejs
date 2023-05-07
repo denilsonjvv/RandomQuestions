@@ -1,18 +1,20 @@
 <% include ../partials/header %>
 
 <div class="container">
-  <% include ../partials/messages %> 
+  <% include ../partials/messages %>
   <div class="greybox">
     <h3>New Comment</h3>
     <hr class="line">
     <form action="/p/<%= question._id %>/comment" method="POST">
       <div class="block">
-            <div class="userImgHold simptip-position-bottom simptip-fade" data-tooltip="Author: <%= currentUser.username %>">
-              <img src="/pro-img/<%= currentUser.profileImg %>" class="user">
-            </div>
-            <strong><%= currentUser.username %></strong>
+        <div class="userImgHold simptip-position-bottom simptip-fade"
+             data-tooltip="Author: <%= currentUser.username %>">
+          <img src="/pro-img/<%= currentUser.profileImg %>" class="user">
+        </div>
+        <strong><%= currentUser.username %></strong>
         <label for="description">Comment:</label>
-        <textarea type="text" id="text" name="text" rows="4" placeholder="New comment..."><%= typeof text != 'undefined' ? text : '' %></textarea>
+        <textarea type="text" id="text" name="text" rows="4"
+                  placeholder="New comment..."><%= typeof text != 'undefined' ? text : '' %></textarea>
       </div>
       <button class="btnlink submitBtn">Submit</button>
     </form>

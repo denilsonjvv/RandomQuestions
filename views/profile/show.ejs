@@ -1,33 +1,33 @@
 <% include ../partials/header %>
-
 <% include ../partials/messages %>
 
 
 <div class="container">
-    <% include ../partials/profileUserSection %>
-    <section class="mainSection">
-        <div class="profile-head">
-            <section class="greybox">
-                <h3>Profile</h3>
-                 <hr class="line">
-                <h4>
-                <%= currentUser.username %>
-                </h4>
-                <p><b>Registered Since: </b><%= currentUser.date.toDateString() %></p>
-                <hr class="line"/>
-                    <% if(currentUserProjects.length== 0){ %>
-                        <p style="text-align:center">You haven't asked a question yet, <a href="/p/new" data-icon="&#xe044;">Pop a Question</a></p>
-                    <%} else {%>
-                        <h5>Your Questions</h5>
-                        <ul class="randomUl">
-                            <% currentUserProjects.reverse().forEach(function(project){ %>
-                                <li><a href="/p/<%= project.id %>" class="mauto" data-icon="&#xe024;"><%= project.title %></a></li>
-                            <% });%>
-                        </ul>
-                    <% }%>
-            </section>
-        </div>
-    </section>
+  <% include ../partials/profileUserSection %>
+  <section class="mainSection">
+    <div class="profile-head">
+      <section class="greybox">
+        <h3>Profile</h3>
+        <hr class="line">
+        <h4>
+          <%= currentUser.username %>
+        </h4>
+        <p><b>Registered Since: </b><%= currentUser.date.toDateString() %></p>
+        <hr class="line"/>
+        <% if(currentUserProjects.length == 0){ %>
+          <p style="text-align:center">You haven't asked a question yet, <a href="/p/new" data-icon="&#xe044;">Pop a
+              Question</a></p>
+        <% } else { %>
+          <h5>Your Questions</h5>
+          <ul class="randomUl">
+            <% currentUserProjects.reverse().forEach(function(project){ %>
+              <li><a href="/p/<%= project.id %>" class="mauto" data-icon="&#xe024;"><%= project.title %></a></li>
+            <% }); %>
+          </ul>
+        <% } %>
+      </section>
+    </div>
+  </section>
 </div>
 
-<%  include ../partials/footer %>
+<% include ../partials/footer %>

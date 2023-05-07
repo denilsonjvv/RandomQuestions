@@ -1,9 +1,9 @@
 /*Config*/
 .d-none {
-    display: none;
+  display: none;
 }
 #listProjects {
-    color: var(--blue);
+  color: var(--blue);
 }
 /*
 profile form code

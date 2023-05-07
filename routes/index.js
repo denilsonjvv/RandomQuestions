@@ -4,21 +4,21 @@ const { postRegister, postLogin, logout } = require("../controllers/index");
 
 // AUTH ROUTES
 router.get("/login", (req, res) => {
-    res.render("login");
+  res.render("login");
 });
-//Post login from conroller
+
+// POST login from conroller
 router.post("/login", postLogin);
 
-//Show register form
+// SHOW register form
 router.get("/register", (req, res) => {
-    res.render("register");
+  res.render("register");
 });
 
-//Create new user
+// CREATE new user
 router.post("/register", postRegister);
 
-//Logout Handler
+// Logout handler
 router.get("/logout", logout);
 
-//Global Router
 module.exports = router;

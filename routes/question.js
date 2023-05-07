@@ -1,23 +1,23 @@
 const express = require("express");
 const router = express.Router({ mergeParams: true });
-let auth = require("../config/auth"); // connect to auth file to authorize.
+const auth = require("../config/auth"); // connect to auth file to authorize.
 //import methods from controller
 const {
-    showQuestion,
-    createQuestion,
-    showEditQuestion,
-    updateQuestion,
-    deleteQuestion,
-    showCommentForm,
-    postNewComment,
-    editComment,
-    updateComment,
-    deleteQuestionComment
+  showQuestion,
+  createQuestion,
+  showEditQuestion,
+  updateQuestion,
+  deleteQuestion,
+  showCommentForm,
+  postNewComment,
+  editComment,
+  updateComment,
+  deleteQuestionComment,
 } = require("../controllers/question");
 
 //Show Post Form
 router.get("/new", auth.userIsLogged, (req, res) => {
-    res.render("questions/new", { user: req.user });
+  res.render("questions/new", { user: req.user });
 });
 //SHOW project page
 router.get("/:id", auth.userIsLogged, showQuestion);
@@ -36,12 +36,15 @@ router.get("/:id/comment/new", auth.userIsLogged, showCommentForm);
 //CREATE comment page
 router.post("/:id/comment", auth.userIsLogged, postNewComment);
 //EDIT comment page
-router.get("/:id/comment/:comment_id/edit",auth.userIsLogged, editComment)
+router.get("/:id/comment/:comment_id/edit", auth.userIsLogged, editComment);
 //UPDATE comment
-router.put("/:id/comment/:comment_id", auth.userIsLogged, updateComment)
-router.delete("/:id/comment/:comment_id", auth.userIsLogged, auth.checkIfCommentOwner, deleteQuestionComment);
-
-
+router.put("/:id/comment/:comment_id", auth.userIsLogged, updateComment);
+router.delete(
+  "/:id/comment/:comment_id",
+  auth.userIsLogged,
+  auth.checkIfCommentOwner,
+  deleteQuestionComment
+);
 
 // //Assign users to question Page
 // router.get("/:id/assign", auth.checkIfOwner, auth.userIsLogged, function (
@@ -183,5 +186,4 @@ router.delete("/:id/comment/:comment_id", auth.userIsLogged, auth.checkIfComment
 //   });
 // });
 
-//Global Router
 module.exports = router;

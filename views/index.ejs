@@ -1,33 +1,34 @@
 <% include partials/header %>
 
 <div class="container clearfix">
-    <% include partials/userSection %>
-    <% include partials/messages %>
-    <section class="mainSection">
-        <section class="greybox" id="activeproj">
-            <button class="btnlink">
-                <a href="/p/new" data-icon="&#xe044;">Pop a Question</a>
-            </button>
-            <h3>Random Questions</h3>
-            <hr class="line">
-                <% if(questions.length === 0){ %>
-                    <p>No questions have been added yet.</p>
-                <%}else{%>
-                    <ul class="randomUl">
-                        <% questions.reverse().forEach(function(question){ %>
-                        <li>
-                            <a href="/p/<%= question._id%>" data-icon="&#xe024;">
-                            <div class="userImgHold simptip-position-top simptip-fade" data-tooltip="Author: <%= question.author.username %>">
-                                <img src="/pro-img/<%= question.author.profileImg %>" class="user">
-                            </div>
-                                <%= question.title %>
-                            </a>
-                        </li>
-                        <% }) // End of projects.forEach;%>
-                    </ul>
-                <% }; %>
-        </section>
+  <% include partials/userSection %>
+  <% include partials/messages %>
+  <section class="mainSection">
+    <section class="greybox" id="activeproj">
+      <button class="btnlink">
+        <a href="/p/new" data-icon="&#xe044;">Pop a Question</a>
+      </button>
+      <h3>Random Questions</h3>
+      <hr class="line">
+      <% if (questions.length === 0) { %>
+        <p>No questions have been added yet.</p>
+      <% } else { %>
+        <ul class="randomUl">
+          <% questions.reverse().forEach(function(question) { %>
+            <li>
+              <a href="/p/<%= question._id %>" data-icon="&#xe024;">
+                <div class="userImgHold simptip-position-top simptip-fade"
+                     data-tooltip="Author: <%= question.author.username %>">
+                  <img src="/pro-img/<%= question.author.profileImg %>" class="user">
+                </div>
+                <%= question.title %>
+              </a>
+            </li>
+          <% }); %>
+        </ul>
+      <% } %>
     </section>
+  </section>
 </div>
 
 <% include partials/footer %>

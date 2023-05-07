@@ -5,12 +5,14 @@
     <h3>Edit Question "<span class="highlight"><%= project.title %></span>"</h3>
     <form action="/p/<%= project._id %>?_method=PUT" method="POST">
       <div class="block">
-          <label for="title">Question</label>
-          <input type="text" id="title" name="project[title]" aria-describedby="title" value="<%= project.title %>" placeholder="<%= project.title %>">
+        <label for="title">Question</label>
+        <input type="text" id="title" name="project[title]" aria-describedby="title" value="<%= project.title %>"
+               placeholder="<%= project.title %>">
       </div>
       <div class="block">
         <label for="description">Description:</label>
-        <textarea type="text" id="description" name="project[description]" placeholder="Describe your question."><%= project.description %></textarea>
+        <textarea type="text" id="description" name="project[description]"
+                  placeholder="Describe your question."><%= project.description %></textarea>
       </div>
       <button class="btnlink submitBtn">Submit</button>
     </form>
